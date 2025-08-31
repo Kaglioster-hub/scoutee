@@ -1,12 +1,18 @@
+import "@/styles/globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
+// 📌 Metadati globali
 export const metadata = {
-  title: "About — Scoutee 🚀",
-  description: "Learn more about Scoutee, your AI-powered survival companion.",
+  title: "Scoutee 🚀 — Survival Companion",
+  description: "Find services, SOS & AI help based on where you are.",
+  metadataBase: new URL("https://scoutee.vrabo.it"),
   openGraph: {
     type: "website",
-    url: "https://scoutee.vrabo.it/about",
+    url: "https://scoutee.vrabo.it",
     siteName: "Scoutee",
-    title: "About — Scoutee 🚀",
-    description: "Learn more about Scoutee, your AI-powered survival companion.",
+    title: "Scoutee 🚀 — Survival Companion",
+    description: "Find services, SOS & AI help based on where you are.",
     images: [
       {
         url: "/logo.svg",
@@ -19,21 +25,23 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@scoutee",
-    title: "About — Scoutee 🚀",
-    description: "Learn more about Scoutee, your AI-powered survival companion.",
+    title: "Scoutee 🚀 — Survival Companion",
+    description: "Find services, SOS & AI help based on where you are.",
     images: ["/logo.svg"],
+  },
+  icons: {
+    icon: "/favicon.ico", // evita warning favicon 404
   },
 };
 
-export default function AboutPage() {
+export default function RootLayout({ children }) {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12 space-y-6">
-      <h1 className="text-3xl font-bold">About Scoutee 🚀</h1>
-      <p className="text-gray-300 leading-relaxed">
-        Scoutee is designed to be your travel & survival companion — giving you
-        fast access to mobility services, eSIMs, and emergency numbers across
-        the world. Built with Next.js, Tailwind, and AI integration.
-      </p>
-    </div>
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-[var(--bg)] text-[var(--text)] transition-colors duration-300">
+        <Navbar />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
+      </body>
+    </html>
   );
 }

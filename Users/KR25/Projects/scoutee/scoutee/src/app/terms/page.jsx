@@ -1,38 +1,34 @@
 export const metadata = {
-  title: "Terms of Service — Scoutee 🚀",
-  description: "Review the terms and conditions for using Scoutee.",
-  openGraph: {
-    type: "website",
-    url: "https://scoutee.vrabo.it/terms",
-    siteName: "Scoutee",
-    title: "Terms of Service — Scoutee 🚀",
-    description: "Review the terms and conditions for using Scoutee.",
-    images: [
-      {
-        url: "/logo.svg",
-        width: 512,
-        height: 512,
-        alt: "Scoutee Logo",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@scoutee",
-    title: "Terms of Service — Scoutee 🚀",
-    description: "Review the terms and conditions for using Scoutee.",
-    images: ["/logo.svg"],
-  },
+  title: "Terms of Service — Scoutee",
+  description: "Read Scoutee's terms of service.",
 };
 
 export default function TermsPage() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12 space-y-6">
-      <h1 className="text-3xl font-bold">Terms of Service</h1>
-      <p className="text-gray-300 leading-relaxed">
-        By using Scoutee, you agree to follow local regulations, respect the
-        services integrated into the platform, and use the tool responsibly.
-      </p>
+    <div className="section fade-in">
+      <h1 className="heading-gradient glow mb-6">Terms of Service 📜</h1>
+      <div className="surface p-6 space-y-4">
+        <p>
+          By using Scoutee, you agree to the following terms. Please read them
+          carefully:
+        </p>
+        <ol className="list-decimal list-inside space-y-2">
+          <li>
+            Scoutee provides information “as is” — we are not responsible for
+            errors or outdated data.
+          </li>
+          <li>
+            You are responsible for how you use the services and links provided.
+          </li>
+          <li>
+            We may update these terms from time to time — continued use implies
+            acceptance.
+          </li>
+        </ol>
+        <p className="muted text-sm">
+          Last updated: {new Date().toLocaleDateString()}
+        </p>
+      </div>
     </div>
   );
 }
