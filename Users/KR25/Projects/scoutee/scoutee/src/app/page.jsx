@@ -17,63 +17,62 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100">
-      {/* Hero */}
-      <header className="text-center py-12">
-        <h1 className="text-4xl font-extrabold mb-3">
-          Welcome to <span className="text-blue-400">Scoutee 🚀</span>
-        </h1>
-        <p className="text-gray-400 max-w-xl mx-auto">
-          Your survival companion for rides, SIMs, and emergencies — anywhere
-          you go.
-        </p>
-      </header>
+    <div className="p-6 space-y-10">
+      <h1 className="text-3xl font-bold text-center">
+        Welcome to Scoutee 🚀
+      </h1>
 
-      <main className="max-w-7xl mx-auto px-6 space-y-12">
-        {/* Services */}
-        <section>
-          <h2 className="text-2xl font-bold mb-6">Services</h2>
-          <div className="services-grid">
-            {d.services.map((s, i) => (
-              <div key={i} className="card">
-                <div className="text-4xl mb-2">{s.icon}</div>
-                <h3>{s.name}</h3>
-                <a
-                  href={s.affiliate_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Open →
-                </a>
-              </div>
-            ))}
-          </div>
-        </section>
+      {/* Services */}
+      <section>
+        <h2 className="text-xl font-semibold mb-4">Services</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {d.services.map((s, i) => (
+            <div
+              key={i}
+              className="p-5 rounded-xl shadow-lg bg-white dark:bg-gray-900 hover:shadow-xl transition"
+            >
+              <div className="text-3xl">{s.icon}</div>
+              <div className="font-bold text-lg mt-2">{s.name}</div>
+              <a
+                className="text-primary text-sm hover:underline"
+                href={s.affiliate_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open →
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        {/* Emergencies */}
-        <section>
-          <h2 className="text-2xl font-bold mb-6 text-red-400">Emergencies</h2>
-          <div className="emergencies">
-            {d.emergencies.map((c, i) => (
-              <div key={i} className="emergency-box">
-                <h3>{c.country}</h3>
-                <ul>
-                  {Object.entries(c.numbers).map(([service, num], j) => (
-                    <li key={j}>
-                      <span className="font-semibold capitalize">
-                        {service}:
-                      </span>{" "}
-                      <span className="text-red-300">{num}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-      </main>
+      {/* Emergencies */}
+      <section>
+        <h2 className="text-xl font-semibold mb-4 text-red-400">Emergencies</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {d.emergencies.map((c, i) => (
+            <div
+              key={i}
+              className="p-5 rounded-xl border-2 border-red-500 bg-red-50 dark:bg-gray-900 shadow-inner"
+            >
+              <h3 className="font-bold text-lg mb-2 text-red-600">
+                {c.country}
+              </h3>
+              <ul className="space-y-1 text-sm">
+                {Object.entries(c.numbers).map(([service, num], j) => (
+                  <li key={j}>
+                    <span className="capitalize font-semibold">
+                      {service}:
+                    </span>{" "}
+                    <span className="text-red-500">{num}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      {/* Chatbot */}
       <ChatBotAI />
     </div>
   );
