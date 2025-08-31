@@ -1,1 +1,7 @@
-import data from '@/data/scoutee_master.json'; export async function GET(){ return Response.json(data.ads); }
+// next.config.js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+};
+
+module.exports = nextConfig;
