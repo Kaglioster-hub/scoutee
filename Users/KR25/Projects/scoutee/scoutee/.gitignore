@@ -1,0 +1,12 @@
+node_modules/
+.pnpm-store/
+dist/
+.next/
+out/
+.env*
+!.env.local.example
+.vscode/
+.idea/
+.DS_Store
+coverage/
+.vercel

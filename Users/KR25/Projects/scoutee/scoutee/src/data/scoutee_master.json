@@ -1,0 +1,416 @@
+{
+  "services": [
+    {
+      "name": "Uber",
+      "category": "Mobility",
+      "icon": "🚕",
+      "affiliate_url": "https://uber.com",
+      "countries": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "Bolt",
+      "category": "Mobility",
+      "icon": "🚖",
+      "affiliate_url": "https://bolt.eu",
+      "countries": [
+        "AT",
+        "BE",
+        "FR",
+        "DE",
+        "IT",
+        "ES",
+        "PT",
+        "PL",
+        "UK"
+      ]
+    },
+    {
+      "name": "FREE NOW",
+      "category": "Mobility",
+      "icon": "🚕",
+      "affiliate_url": "https://free-now.com",
+      "countries": [
+        "DE",
+        "FR",
+        "IT",
+        "ES",
+        "UK"
+      ]
+    },
+    {
+      "name": "Enjoy",
+      "category": "Car Sharing",
+      "icon": "🚗",
+      "affiliate_url": "https://enjoy.eni.com",
+      "countries": [
+        "IT"
+      ]
+    },
+    {
+      "name": "SHARE NOW",
+      "category": "Car Sharing",
+      "icon": "🚘",
+      "affiliate_url": "https://www.share-now.com",
+      "countries": [
+        "DE",
+        "FR",
+        "IT",
+        "ES",
+        "AT"
+      ]
+    },
+    {
+      "name": "eCooltra",
+      "category": "Scooter",
+      "icon": "🛵",
+      "affiliate_url": "https://www.ecooltra.com",
+      "countries": [
+        "IT",
+        "ES",
+        "PT"
+      ]
+    },
+    {
+      "name": "Lime",
+      "category": "E-Scooter",
+      "icon": "🛴",
+      "affiliate_url": "https://li.me",
+      "countries": [
+        "FR",
+        "DE",
+        "IT",
+        "ES",
+        "PT",
+        "SE",
+        "NO",
+        "UK"
+      ]
+    },
+    {
+      "name": "TIER",
+      "category": "E-Scooter",
+      "icon": "🛴",
+      "affiliate_url": "https://www.tier.app",
+      "countries": [
+        "DE",
+        "AT",
+        "NO",
+        "SE",
+        "IT",
+        "FR",
+        "NL"
+      ]
+    },
+    {
+      "name": "Voi",
+      "category": "E-Scooter",
+      "icon": "🛴",
+      "affiliate_url": "https://www.voi.com",
+      "countries": [
+        "SE",
+        "DK",
+        "FI",
+        "DE",
+        "FR",
+        "IT",
+        "ES",
+        "UK"
+      ]
+    },
+    {
+      "name": "Dott",
+      "category": "E-Scooter",
+      "icon": "🚲",
+      "affiliate_url": "https://ridedott.com",
+      "countries": [
+        "FR",
+        "BE",
+        "IT",
+        "DE",
+        "PL"
+      ]
+    },
+    {
+      "name": "Citymapper",
+      "category": "Transit",
+      "icon": "🚌",
+      "affiliate_url": "https://citymapper.com",
+      "countries": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "Moovit",
+      "category": "Transit",
+      "icon": "🚇",
+      "affiliate_url": "https://moovitapp.com",
+      "countries": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "Airalo",
+      "category": "Connectivity",
+      "icon": "📶",
+      "affiliate_url": "https://airalo.com",
+      "countries": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "Holafly",
+      "category": "Connectivity",
+      "icon": "📡",
+      "affiliate_url": "https://holafly.com",
+      "countries": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "Nomad",
+      "category": "Connectivity",
+      "icon": "📱",
+      "affiliate_url": "https://getnomad.app",
+      "countries": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "GigSky",
+      "category": "Connectivity",
+      "icon": "🌐",
+      "affiliate_url": "https://gigsky.com",
+      "countries": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "Revolut",
+      "category": "Fintech",
+      "icon": "💳",
+      "affiliate_url": "https://revolut.com",
+      "countries": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "Wise",
+      "category": "Fintech",
+      "icon": "💱",
+      "affiliate_url": "https://wise.com",
+      "countries": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "N26",
+      "category": "Fintech",
+      "icon": "🏦",
+      "affiliate_url": "https://n26.com",
+      "countries": [
+        "DE",
+        "AT",
+        "IT",
+        "ES",
+        "FR"
+      ]
+    },
+    {
+      "name": "Wolt",
+      "category": "Food",
+      "icon": "🍔",
+      "affiliate_url": "https://wolt.com",
+      "countries": [
+        "AT",
+        "DE",
+        "GR",
+        "IT",
+        "SE",
+        "FI",
+        "PL",
+        "NO"
+      ]
+    },
+    {
+      "name": "Glovo",
+      "category": "Food",
+      "icon": "🥡",
+      "affiliate_url": "https://glovoapp.com",
+      "countries": [
+        "IT",
+        "ES",
+        "PT",
+        "RO",
+        "PL",
+        "UA",
+        "HR",
+        "RS"
+      ]
+    },
+    {
+      "name": "Deliveroo",
+      "category": "Food",
+      "icon": "🥢",
+      "affiliate_url": "https://deliveroo.com",
+      "countries": [
+        "IT",
+        "FR",
+        "UK",
+        "NL",
+        "BE",
+        "ES",
+        "IE"
+      ]
+    },
+    {
+      "name": "UberEats",
+      "category": "Food",
+      "icon": "🍕",
+      "affiliate_url": "https://ubereats.com",
+      "countries": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "GetYourGuide",
+      "category": "Tours",
+      "icon": "🎟️",
+      "affiliate_url": "https://getyourguide.com",
+      "countries": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "Klook",
+      "category": "Tours",
+      "icon": "🌍",
+      "affiliate_url": "https://klook.com",
+      "countries": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "TheFork",
+      "category": "Restaurants",
+      "icon": "🍴",
+      "affiliate_url": "https://thefork.com",
+      "countries": [
+        "IT",
+        "FR",
+        "ES",
+        "PT",
+        "BE",
+        "NL"
+      ]
+    }
+  ],
+  "emergencies": [
+    {
+      "country": "Italy",
+      "iso": "IT",
+      "numbers": {
+        "general": "112",
+        "police": "113",
+        "ambulance": "118",
+        "fire": "115"
+      }
+    },
+    {
+      "country": "France",
+      "iso": "FR",
+      "numbers": {
+        "general": "112",
+        "police": "17",
+        "ambulance": "15",
+        "fire": "18"
+      }
+    },
+    {
+      "country": "Germany",
+      "iso": "DE",
+      "numbers": {
+        "general": "112",
+        "police": "110"
+      }
+    },
+    {
+      "country": "Spain",
+      "iso": "ES",
+      "numbers": {
+        "general": "112",
+        "police": "091",
+        "civil_guard": "062"
+      }
+    },
+    {
+      "country": "United Kingdom",
+      "iso": "UK",
+      "numbers": {
+        "general": "999",
+        "alternative": "112"
+      }
+    },
+    {
+      "country": "Portugal",
+      "iso": "PT",
+      "numbers": {
+        "general": "112"
+      }
+    },
+    {
+      "country": "Netherlands",
+      "iso": "NL",
+      "numbers": {
+        "general": "112"
+      }
+    },
+    {
+      "country": "Norway",
+      "iso": "NO",
+      "numbers": {
+        "police": "112",
+        "ambulance": "113",
+        "fire": "110"
+      }
+    },
+    {
+      "country": "Switzerland",
+      "iso": "CH",
+      "numbers": {
+        "general": "112",
+        "police": "117",
+        "ambulance": "144",
+        "fire": "118"
+      }
+    },
+    {
+      "country": "WORLD",
+      "iso": "ALL",
+      "numbers": {
+        "general": "112"
+      }
+    }
+  ],
+  "ads": [
+    {
+      "city": "Rome",
+      "category": "Scooter",
+      "title": "eCooltra -20% oggi",
+      "url": "https://www.ecooltra.com/rome"
+    },
+    {
+      "city": "Madrid",
+      "category": "Taxi",
+      "title": "Bolt 5€ off",
+      "url": "https://bolt.eu/madrid"
+    },
+    {
+      "city": "Berlin",
+      "category": "Tour",
+      "title": "GetYourGuide - Muro di Berlino",
+      "url": "https://getyourguide.com/berlin"
+    }
+  ]
+}

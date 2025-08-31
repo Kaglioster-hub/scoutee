@@ -1,0 +1,1 @@
+export async function POST(req){ const {message}=await req.json(); let reply='Try Uber, SOS or eSIM.'; if((message||'').toLowerCase().includes('sos')) reply='Call 112 (EU) or your local emergency number.'; return Response.json({reply}); }
