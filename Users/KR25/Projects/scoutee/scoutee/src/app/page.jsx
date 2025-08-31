@@ -3,6 +3,14 @@
 import data from "@/data/scoutee_master.json";
 import ChatBotAI from "@/components/ChatBotAI";
 
+// Funzione helper per convertire codice ISO → bandiera emoji
+function isoToFlag(iso) {
+  if (!iso || iso === "ALL") return "🌍";
+  return iso
+    .toUpperCase()
+    .replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt()));
+}
+
 export default function Page() {
   const { services, emergencies, ads } = data;
 
@@ -38,27 +46,48 @@ export default function Page() {
             </div>
           ) : (
             <div className="grid-auto">
-              {services.map((s, i) => (
-                <article
-                  key={`${s.name}-${i}`}
-                  className="card flex flex-col pop"
-                >
-                  <div className="text-4xl mb-3" aria-hidden>
-                    {s.icon}
-                  </div>
-                  <h3 className="mb-2">{s.name}</h3>
-                  <p className="muted text-sm mb-4">{s.category}</p>
-                  <a
-                    href={s.affiliate_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-primary mt-auto"
-                    aria-label={`Open ${s.name}`}
+              {services.map((s, i) => {
+                const logoUrl = s.affiliate_url
+                  ? `https://logo.clearbit.com/${new URL(s.affiliate_url).hostname}`
+                  : null;
+
+                return (
+                  <article
+                    key={`${s.name}-${i}`}
+                    className="card flex flex-col items-center pop text-center"
                   >
-                    Open →
-                  </a>
-                </article>
-              ))}
+                    <div className="mb-3 flex items-center justify-center">
+                      {logoUrl ? (
+                        <img
+                          src={logoUrl}
+                          alt={`${s.name} logo`}
+                          className="w-12 h-12 object-contain rounded-md"
+                          onError={(e) => {
+                            e.currentTarget.style.display = "none";
+                            e.currentTarget.insertAdjacentHTML(
+                              "afterend",
+                              `<span class='text-5xl'>${s.icon}</span>`
+                            );
+                          }}
+                        />
+                      ) : (
+                        <span className="text-5xl">{s.icon}</span>
+                      )}
+                    </div>
+                    <h3 className="mb-1">{s.name}</h3>
+                    <p className="muted text-sm mb-4">{s.category}</p>
+                    <a
+                      href={s.affiliate_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-primary mt-auto"
+                      aria-label={`Open ${s.name}`}
+                    >
+                      Open →
+                    </a>
+                  </article>
+                );
+              })}
             </div>
           )}
         </section>
@@ -74,12 +103,15 @@ export default function Page() {
             <div className="grid-auto">
               {emergencies.map((c, i) => (
                 <article key={`${c.iso}-${i}`} className="card-sos pop">
-                  <h3>{c.country}</h3>
+                  <h3 className="flex items-center gap-2 mb-2">
+                    <span className="text-xl">{isoToFlag(c.iso)}</span>
+                    {c.country}
+                  </h3>
                   <ul>
                     {Object.entries(c.numbers).map(([service, num], j) => (
                       <li
                         key={`${c.iso}-${service}-${j}`}
-                        className="flex justify-between"
+                        className="flex justify-between text-sm"
                       >
                         <span className="capitalize">{service}</span>
                         <span className="text-red-600 dark:text-red-300 font-semibold">
