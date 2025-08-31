@@ -90,13 +90,14 @@ export async function POST(req) {
       }
     }
 
+    // 🟢 Fallback user-friendly
     return NextResponse.json(
-      { reply: `⚠️ Errore HuggingFace: ${lastErr?.message || "unknown"}` },
+      { reply: "⚠️ Al momento l'AI non è disponibile. Riprova più tardi o usa SOS." },
       { status: 502 }
     );
   } catch (e) {
     return NextResponse.json(
-      { reply: `⚠️ Errore interno: ${e?.message || "unknown"}` },
+      { reply: "⚠️ Errore interno inatteso. Riprova tra poco." },
       { status: 500 }
     );
   }
