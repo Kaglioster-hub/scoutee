@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import data from "@/data/scoutee_master.json";
 import ChatBotAI from "@/components/ChatBotAI";
 
 // Funzione helper per convertire codice ISO → bandiera emoji
@@ -11,54 +11,7 @@ function isoToFlag(iso) {
     .replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt()));
 }
 
-// ✅ Componente service con fallback logo sicuro
-function ServiceCard({ service }) {
-  const [imgError, setImgError] = useState(false);
-
-  const logoUrl = service.affiliate_url
-    ? `https://logo.clearbit.com/${new URL(service.affiliate_url).hostname}`
-    : null;
-
-  return (
-    <article className="card flex flex-col items-center pop text-center">
-      <div className="mb-3 flex items-center justify-center">
-        {!imgError && logoUrl ? (
-          <img
-            src={logoUrl}
-            alt={`${service.name} logo`}
-            className="w-12 h-12 object-contain rounded-md"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <span className="text-5xl">{service.icon}</span>
-        )}
-      </div>
-      <h3 className="mb-1">{service.name}</h3>
-      <p className="muted text-sm mb-4">{service.category}</p>
-      <a
-        href={service.affiliate_url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="btn btn-primary mt-auto"
-        aria-label={`Open ${service.name}`}
-      >
-        Open →
-      </a>
-    </article>
-  );
-}
-
 export default function Page() {
-  const [data, setData] = useState({ services: [], emergencies: [], ads: [] });
-
-  // ✅ Carico JSON runtime da /public/scoutee_master.json
-  useEffect(() => {
-    fetch("/scoutee_master.json")
-      .then((r) => r.json())
-      .then((json) => setData(json))
-      .catch((e) => console.error("Error loading master.json", e));
-  }, []);
-
   const { services, emergencies, ads } = data;
 
   return (
@@ -71,9 +24,15 @@ export default function Page() {
           numbers worldwide.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-4">
-          <a href="#services" className="btn btn-primary pop">Explore Services</a>
-          <a href="#emergencies" className="btn btn-ghost pop">Emergency Numbers</a>
-          <a href="#ads" className="btn btn-ghost pop">Local Offers</a>
+          <a href="#services" className="btn btn-primary pop">
+            Explore Services
+          </a>
+          <a href="#emergencies" className="btn btn-ghost pop">
+            Emergency Numbers
+          </a>
+          <a href="#ads" className="btn btn-ghost pop">
+            Local Offers
+          </a>
         </div>
       </header>
 
@@ -82,12 +41,53 @@ export default function Page() {
         <section id="services" className="section fade-in">
           <h2 className="text-center">🌍 Services</h2>
           {services.length === 0 ? (
-            <div className="surface p-6 text-center muted">Loading services…</div>
+            <div className="surface p-6 text-center muted">
+              No services available right now.
+            </div>
           ) : (
             <div className="grid-auto">
-              {services.map((s, i) => (
-                <ServiceCard key={`${s.name}-${i}`} service={s} />
-              ))}
+              {services.map((s, i) => {
+                const logoUrl = s.affiliate_url
+                  ? `https://logo.clearbit.com/${new URL(s.affiliate_url).hostname}`
+                  : null;
+
+                return (
+                  <article
+                    key={`${s.name}-${i}`}
+                    className="card flex flex-col items-center pop text-center"
+                  >
+                    <div className="mb-3 flex items-center justify-center">
+                      {logoUrl ? (
+                        <img
+                          src={logoUrl}
+                          alt={`${s.name} logo`}
+                          className="w-12 h-12 object-contain rounded-md"
+                          onError={(e) => {
+                            e.currentTarget.style.display = "none";
+                            e.currentTarget.insertAdjacentHTML(
+                              "afterend",
+                              `<span class='text-5xl'>${s.icon}</span>`
+                            );
+                          }}
+                        />
+                      ) : (
+                        <span className="text-5xl">{s.icon}</span>
+                      )}
+                    </div>
+                    <h3 className="mb-1">{s.name}</h3>
+                    <p className="muted text-sm mb-4">{s.category}</p>
+                    <a
+                      href={s.affiliate_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-primary mt-auto"
+                      aria-label={`Open ${s.name}`}
+                    >
+                      Open →
+                    </a>
+                  </article>
+                );
+              })}
             </div>
           )}
         </section>
@@ -96,7 +96,9 @@ export default function Page() {
         <section id="emergencies" className="section fade-in">
           <h2 className="text-center text-red-500">🚨 Emergency Numbers</h2>
           {emergencies.length === 0 ? (
-            <div className="surface p-6 text-center muted">Loading emergency numbers…</div>
+            <div className="surface p-6 text-center muted">
+              Emergency numbers unavailable.
+            </div>
           ) : (
             <div className="grid-auto">
               {emergencies.map((c, i) => (
@@ -107,9 +109,14 @@ export default function Page() {
                   </h3>
                   <ul>
                     {Object.entries(c.numbers).map(([service, num], j) => (
-                      <li key={`${c.iso}-${service}-${j}`} className="flex justify-between text-sm">
+                      <li
+                        key={`${c.iso}-${service}-${j}`}
+                        className="flex justify-between text-sm"
+                      >
                         <span className="capitalize">{service}</span>
-                        <span className="text-red-600 dark:text-red-300 font-semibold">{num}</span>
+                        <span className="text-red-600 dark:text-red-300 font-semibold">
+                          {num}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -123,7 +130,9 @@ export default function Page() {
         <section id="ads" className="section fade-in">
           <h2 className="text-center">🔥 Local Offers</h2>
           {ads.length === 0 ? (
-            <div className="surface p-6 text-center muted">Loading offers…</div>
+            <div className="surface p-6 text-center muted">
+              No offers available.
+            </div>
           ) : (
             <div className="grid-auto">
               {ads.map((ad, i) => (
@@ -135,7 +144,9 @@ export default function Page() {
                   className="card pop flex flex-col"
                 >
                   <h3 className="mb-1">{ad.title}</h3>
-                  <p className="muted text-sm">{ad.city} — {ad.category}</p>
+                  <p className="muted text-sm">
+                    {ad.city} — {ad.category}
+                  </p>
                 </a>
               ))}
             </div>
