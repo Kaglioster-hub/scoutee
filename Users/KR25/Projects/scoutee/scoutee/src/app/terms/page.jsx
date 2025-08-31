@@ -1,20 +1,17 @@
 export const metadata = {
   title: "Terms of Service — Scoutee",
-  description: "Read Scoutee’s terms of service.",
+  description: "Read the terms of service for using Scoutee.",
 };
 
 export default function TermsPage() {
   return (
-    <main className="container-app py-16 space-y-8">
-      <h1 className="heading-gradient glow">Terms of Service</h1>
-      <p className="muted text-lg">
-        By using Scoutee, you agree to use the platform responsibly and only for
-        lawful purposes.
+    <div className="section">
+      <h1 className="heading-gradient glow mb-4">Terms of Service</h1>
+      <p className="muted">
+        By using Scoutee, you agree to use the app responsibly. We provide
+        access to third-party services (rides, eSIMs, payments) but we are not
+        responsible for their terms and conditions.
       </p>
-      <p>
-        Scoutee provides third-party links and services “as is” without
-        warranties. We are not responsible for external providers.
-      </p>
-    </main>
+    </div>
   );
 }
