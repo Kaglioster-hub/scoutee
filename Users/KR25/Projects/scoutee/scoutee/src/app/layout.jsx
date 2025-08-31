@@ -1,18 +1,12 @@
-import "@/styles/globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-
-// ✅ Metadata gestito solo qui (non nei client components)
 export const metadata = {
-  title: "Scoutee 🚀 — Survival Companion",
-  description: "Find services, SOS & AI help based on where you are.",
-  metadataBase: new URL("https://scoutee.vrabo.it"),
+  title: "About — Scoutee 🚀",
+  description: "Learn more about Scoutee, your AI-powered survival companion.",
   openGraph: {
     type: "website",
-    url: "https://scoutee.vrabo.it",
+    url: "https://scoutee.vrabo.it/about",
     siteName: "Scoutee",
-    title: "Scoutee 🚀 — Survival Companion",
-    description: "Find services, SOS & AI help based on where you are.",
+    title: "About — Scoutee 🚀",
+    description: "Learn more about Scoutee, your AI-powered survival companion.",
     images: [
       {
         url: "/logo.svg",
@@ -25,20 +19,21 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@scoutee",
-    title: "Scoutee 🚀 — Survival Companion",
-    description: "Find services, SOS & AI help based on where you are.",
+    title: "About — Scoutee 🚀",
+    description: "Learn more about Scoutee, your AI-powered survival companion.",
     images: ["/logo.svg"],
   },
 };
 
-export default function RootLayout({ children }) {
+export default function AboutPage() {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="bg-comfort-light dark:bg-comfort-dark text-gray-900 dark:text-gray-100">
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-      </body>
-    </html>
+    <div className="max-w-4xl mx-auto px-6 py-12 space-y-6">
+      <h1 className="text-3xl font-bold">About Scoutee 🚀</h1>
+      <p className="text-gray-300 leading-relaxed">
+        Scoutee is designed to be your travel & survival companion — giving you
+        fast access to mobility services, eSIMs, and emergency numbers across
+        the world. Built with Next.js, Tailwind, and AI integration.
+      </p>
+    </div>
   );
 }

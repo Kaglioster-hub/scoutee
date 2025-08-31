@@ -17,48 +17,63 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Welcome to Scoutee 🚀</h1>
+    <div className="min-h-screen bg-gray-950 text-gray-100">
+      {/* Hero */}
+      <header className="text-center py-12">
+        <h1 className="text-4xl font-extrabold mb-3">
+          Welcome to <span className="text-blue-400">Scoutee 🚀</span>
+        </h1>
+        <p className="text-gray-400 max-w-xl mx-auto">
+          Your survival companion for rides, SIMs, and emergencies — anywhere
+          you go.
+        </p>
+      </header>
 
-      {/* Services */}
-      <section>
-        <h2 className="text-lg font-semibold mb-2">Services</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {d.services.map((s, i) => (
-            <div
-              key={i}
-              className="p-4 rounded-xl shadow-card bg-white dark:bg-gray-900"
-            >
-              <div className="text-3xl">{s.icon}</div>
-              <div className="font-bold">{s.name}</div>
-              <a
-                className="text-primary text-sm"
-                href={s.affiliate_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Open →
-              </a>
-            </div>
-          ))}
-        </div>
-      </section>
+      <main className="max-w-7xl mx-auto px-6 space-y-12">
+        {/* Services */}
+        <section>
+          <h2 className="text-2xl font-bold mb-6">Services</h2>
+          <div className="services-grid">
+            {d.services.map((s, i) => (
+              <div key={i} className="card">
+                <div className="text-4xl mb-2">{s.icon}</div>
+                <h3>{s.name}</h3>
+                <a
+                  href={s.affiliate_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open →
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
 
-      {/* Emergencies */}
-      <section>
-        <h2 className="text-lg font-semibold mb-2">Emergencies</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {d.emergencies.map((c, i) => (
-            <div key={i} className="p-4 border-2 border-sos rounded-xl">
-              <div className="font-bold">{c.country}</div>
-              <pre className="text-xs">
-                {JSON.stringify(c.numbers, null, 2)}
-              </pre>
-            </div>
-          ))}
-        </div>
-      </section>
+        {/* Emergencies */}
+        <section>
+          <h2 className="text-2xl font-bold mb-6 text-red-400">Emergencies</h2>
+          <div className="emergencies">
+            {d.emergencies.map((c, i) => (
+              <div key={i} className="emergency-box">
+                <h3>{c.country}</h3>
+                <ul>
+                  {Object.entries(c.numbers).map(([service, num], j) => (
+                    <li key={j}>
+                      <span className="font-semibold capitalize">
+                        {service}:
+                      </span>{" "}
+                      <span className="text-red-300">{num}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
 
+      {/* Chatbot */}
       <ChatBotAI />
     </div>
   );

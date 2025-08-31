@@ -3,7 +3,85 @@
 @tailwind utilities;
 
 /* Comfort base */
-:root { color-scheme: light dark; }
-html,body { height: 100%; }
-body { margin: 0; }
-a { text-decoration: none; }
+:root { 
+  color-scheme: light dark;
+}
+
+/* Body base */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #0f1115; /* dark elegante */
+  color: #f1f5f9; /* testo chiaro */
+}
+
+/* Link */
+a { 
+  text-decoration: none; 
+  color: #38bdf8; 
+}
+a:hover { 
+  color: #7dd3fc; 
+  text-decoration: underline;
+}
+
+/* Navbar */
+nav {
+  @apply sticky top-0 z-50 flex justify-between items-center px-6 py-3 bg-gray-900/80 backdrop-blur border-b border-gray-800;
+}
+
+/* Titoli */
+h1,h2,h3,h4 {
+  @apply font-bold tracking-tight text-white;
+}
+
+/* Sezione servizi (griglia) */
+.services-grid {
+  @apply grid gap-6 p-6 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+/* Card servizio */
+.card {
+  @apply bg-gray-800/70 rounded-2xl shadow-lg p-5 flex flex-col justify-between transition hover:bg-gray-700;
+}
+.card h3 {
+  @apply text-lg font-semibold text-white mb-2;
+}
+.card a {
+  @apply text-blue-400 hover:text-blue-300 mt-2;
+}
+
+/* Emergencies */
+.emergencies {
+  @apply grid gap-6 p-6 mt-10 sm:grid-cols-2 lg:grid-cols-3;
+}
+.emergency-box {
+  @apply bg-red-900/30 border border-red-500/40 rounded-xl p-4;
+}
+.emergency-box h3 {
+  @apply text-red-400 text-lg font-semibold mb-3;
+}
+.emergency-box ul {
+  @apply space-y-1 text-sm text-gray-200;
+}
+
+/* Chatbot */
+.chatbox {
+  @apply fixed bottom-6 right-6 w-72 bg-gray-900 border border-gray-800 rounded-2xl shadow-lg flex flex-col;
+}
+.chatbox-header {
+  @apply bg-gray-800 px-3 py-2 font-semibold text-sm text-white;
+}
+.chatbox-messages {
+  @apply flex-1 overflow-y-auto p-3 space-y-2 text-sm text-gray-200;
+}
+.chatbox-input {
+  @apply flex border-t border-gray-700;
+}
+.chatbox-input input {
+  @apply flex-1 bg-gray-900 px-3 py-2 text-sm text-gray-100 outline-none;
+}
+.chatbox-input button {
+  @apply px-4 py-2 text-blue-400 hover:text-blue-300;
+}

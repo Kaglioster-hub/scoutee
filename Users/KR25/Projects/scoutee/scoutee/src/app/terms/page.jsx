@@ -1,22 +1,38 @@
 export const metadata = {
-  title: "Terms & Conditions – Scoutee",
-  description: "Read the terms and conditions of using Scoutee services.",
+  title: "Terms of Service — Scoutee 🚀",
+  description: "Review the terms and conditions for using Scoutee.",
+  openGraph: {
+    type: "website",
+    url: "https://scoutee.vrabo.it/terms",
+    siteName: "Scoutee",
+    title: "Terms of Service — Scoutee 🚀",
+    description: "Review the terms and conditions for using Scoutee.",
+    images: [
+      {
+        url: "/logo.svg",
+        width: 512,
+        height: 512,
+        alt: "Scoutee Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@scoutee",
+    title: "Terms of Service — Scoutee 🚀",
+    description: "Review the terms and conditions for using Scoutee.",
+    images: ["/logo.svg"],
+  },
 };
 
 export default function TermsPage() {
   return (
-    <section className="p-6 space-y-4">
-      <h1 className="text-3xl font-bold">Terms & Conditions</h1>
-      <p>
-        Utilizzando Scoutee accetti di farlo a tuo rischio. Non garantiamo
-        che tutti i servizi o numeri di emergenza siano sempre accurati o
-        disponibili.
+    <div className="max-w-4xl mx-auto px-6 py-12 space-y-6">
+      <h1 className="text-3xl font-bold">Terms of Service</h1>
+      <p className="text-gray-300 leading-relaxed">
+        By using Scoutee, you agree to follow local regulations, respect the
+        services integrated into the platform, and use the tool responsibly.
       </p>
-      <p>
-        L’app è fornita così com’è, senza garanzie espresse o implicite.
-        Raccomandiamo sempre di verificare le informazioni critiche
-        attraverso fonti ufficiali.
-      </p>
-    </section>
+    </div>
   );
 }
