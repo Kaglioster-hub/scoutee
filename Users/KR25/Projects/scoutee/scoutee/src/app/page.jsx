@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import data from "@/data/scoutee_master.json";
 import ChatBotAI from "@/components/ChatBotAI";
 
@@ -11,8 +12,45 @@ function isoToFlag(iso) {
     .replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt()));
 }
 
+// ✅ Componente service con fallback logo sicuro
+function ServiceCard({ service }) {
+  const [imgError, setImgError] = useState(false);
+
+  const logoUrl = service.affiliate_url
+    ? `https://logo.clearbit.com/${new URL(service.affiliate_url).hostname}`
+    : null;
+
+  return (
+    <article className="card flex flex-col items-center pop text-center">
+      <div className="mb-3 flex items-center justify-center">
+        {!imgError && logoUrl ? (
+          <img
+            src={logoUrl}
+            alt={`${service.name} logo`}
+            className="w-12 h-12 object-contain rounded-md"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <span className="text-5xl">{service.icon}</span>
+        )}
+      </div>
+      <h3 className="mb-1">{service.name}</h3>
+      <p className="muted text-sm mb-4">{service.category}</p>
+      <a
+        href={service.affiliate_url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn btn-primary mt-auto"
+        aria-label={`Open ${service.name}`}
+      >
+        Open →
+      </a>
+    </article>
+  );
+}
+
 export default function Page() {
-  const { services, emergencies, ads } = data;
+  const { services = [], emergencies = [], ads = [] } = data || {};
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
@@ -46,48 +84,9 @@ export default function Page() {
             </div>
           ) : (
             <div className="grid-auto">
-              {services.map((s, i) => {
-                const logoUrl = s.affiliate_url
-                  ? `https://logo.clearbit.com/${new URL(s.affiliate_url).hostname}`
-                  : null;
-
-                return (
-                  <article
-                    key={`${s.name}-${i}`}
-                    className="card flex flex-col items-center pop text-center"
-                  >
-                    <div className="mb-3 flex items-center justify-center">
-                      {logoUrl ? (
-                        <img
-                          src={logoUrl}
-                          alt={`${s.name} logo`}
-                          className="w-12 h-12 object-contain rounded-md"
-                          onError={(e) => {
-                            e.currentTarget.style.display = "none";
-                            e.currentTarget.insertAdjacentHTML(
-                              "afterend",
-                              `<span class='text-5xl'>${s.icon}</span>`
-                            );
-                          }}
-                        />
-                      ) : (
-                        <span className="text-5xl">{s.icon}</span>
-                      )}
-                    </div>
-                    <h3 className="mb-1">{s.name}</h3>
-                    <p className="muted text-sm mb-4">{s.category}</p>
-                    <a
-                      href={s.affiliate_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-primary mt-auto"
-                      aria-label={`Open ${s.name}`}
-                    >
-                      Open →
-                    </a>
-                  </article>
-                );
-              })}
+              {services.map((s, i) => (
+                <ServiceCard key={`${s.name}-${i}`} service={s} />
+              ))}
             </div>
           )}
         </section>
