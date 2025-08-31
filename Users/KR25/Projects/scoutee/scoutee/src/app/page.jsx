@@ -22,17 +22,19 @@ export default function Page() {
             emergencies: emergenciesRes || [],
           });
         }
-      } catch (e) {
+      } catch {
         setError("⚠️ Could not load data. Please refresh.");
       } finally {
         if (alive) setLoading(false);
       }
     })();
-    return () => { alive = false; };
+    return () => {
+      alive = false;
+    };
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
       {/* 🌟 Hero */}
       <header className="hero fade-in">
         <h1 className="heading-gradient glow mb-6">
@@ -43,12 +45,16 @@ export default function Page() {
           numbers worldwide.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-4">
-          <a href="#services" className="btn btn-primary pop">Explore Services</a>
-          <a href="#emergencies" className="btn btn-ghost pop">Emergency Numbers</a>
+          <a href="#services" className="btn btn-primary pop">
+            Explore Services
+          </a>
+          <a href="#emergencies" className="btn btn-ghost pop">
+            Emergency Numbers
+          </a>
         </div>
       </header>
 
-      <main className="space-y-20">
+      <main className="space-y-20 container-app">
         {/* ⚠️ Error */}
         {error && (
           <section className="section">
@@ -75,8 +81,13 @@ export default function Page() {
           ) : (
             <div className="grid-auto">
               {data.services.map((s, i) => (
-                <article key={i} className="card flex flex-col">
-                  <div className="text-4xl mb-3">{s.icon}</div>
+                <article
+                  key={`${s.name}-${i}`}
+                  className="card flex flex-col pop"
+                >
+                  <div className="text-4xl mb-3" aria-hidden>
+                    {s.icon}
+                  </div>
                   <h3 className="mb-2">{s.name}</h3>
                   {s.description && (
                     <p className="muted text-sm mb-4">{s.description}</p>
@@ -86,6 +97,7 @@ export default function Page() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-primary mt-auto"
+                    aria-label={`Open ${s.name}`}
                   >
                     Open →
                   </a>
@@ -112,11 +124,11 @@ export default function Page() {
           ) : (
             <div className="grid-auto">
               {data.emergencies.map((c, i) => (
-                <article key={i} className="card-sos">
+                <article key={`${c.country}-${i}`} className="card-sos pop">
                   <h3>{c.country}</h3>
                   <ul>
                     {Object.entries(c.numbers).map(([service, num], j) => (
-                      <li key={j} className="flex justify-between">
+                      <li key={`${c.country}-${service}-${j}`} className="flex justify-between">
                         <span className="capitalize">{service}</span>
                         <span className="text-red-600 dark:text-red-300 font-semibold">
                           {num}

@@ -2,17 +2,17 @@ import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-// 📌 Metadati globali
+// ✅ Metadata gestito solo qui
 export const metadata = {
   title: "Scoutee 🚀 — Survival Companion",
-  description: "Find services, SOS & AI help based on where you are.",
+  description: "Find rides, SOS numbers & AI help wherever you are.",
   metadataBase: new URL("https://scoutee.vrabo.it"),
   openGraph: {
     type: "website",
     url: "https://scoutee.vrabo.it",
     siteName: "Scoutee",
     title: "Scoutee 🚀 — Survival Companion",
-    description: "Find services, SOS & AI help based on where you are.",
+    description: "Find rides, SOS numbers & AI help wherever you are.",
     images: [
       {
         url: "/logo.svg",
@@ -26,20 +26,22 @@ export const metadata = {
     card: "summary_large_image",
     site: "@scoutee",
     title: "Scoutee 🚀 — Survival Companion",
-    description: "Find services, SOS & AI help based on where you are.",
+    description: "Find rides, SOS numbers & AI help wherever you are.",
     images: ["/logo.svg"],
-  },
-  icons: {
-    icon: "/favicon.ico", // evita warning favicon 404
   },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-[var(--bg)] text-[var(--text)] transition-colors duration-300">
+      <body className="bg-[var(--bg)] text-[var(--text)] transition-colors duration-500 antialiased">
+        {/* 🧭 Navbar */}
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+
+        {/* 📦 Contenuto */}
+        <main className="pt-6">{children}</main>
+
+        {/* ⚓ Footer */}
         <Footer />
       </body>
     </html>
