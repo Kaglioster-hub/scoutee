@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import data from "@/data/scoutee_master.json";
+import { useEffect, useState } from "react";
 import ChatBotAI from "@/components/ChatBotAI";
 
 // Funzione helper per convertire codice ISO → bandiera emoji
@@ -50,7 +49,17 @@ function ServiceCard({ service }) {
 }
 
 export default function Page() {
-  const { services = [], emergencies = [], ads = [] } = data || {};
+  const [data, setData] = useState({ services: [], emergencies: [], ads: [] });
+
+  // ✅ Carico JSON runtime da /public/scoutee_master.json
+  useEffect(() => {
+    fetch("/scoutee_master.json")
+      .then((r) => r.json())
+      .then((json) => setData(json))
+      .catch((e) => console.error("Error loading master.json", e));
+  }, []);
+
+  const { services, emergencies, ads } = data;
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
@@ -62,15 +71,9 @@ export default function Page() {
           numbers worldwide.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-4">
-          <a href="#services" className="btn btn-primary pop">
-            Explore Services
-          </a>
-          <a href="#emergencies" className="btn btn-ghost pop">
-            Emergency Numbers
-          </a>
-          <a href="#ads" className="btn btn-ghost pop">
-            Local Offers
-          </a>
+          <a href="#services" className="btn btn-primary pop">Explore Services</a>
+          <a href="#emergencies" className="btn btn-ghost pop">Emergency Numbers</a>
+          <a href="#ads" className="btn btn-ghost pop">Local Offers</a>
         </div>
       </header>
 
@@ -79,9 +82,7 @@ export default function Page() {
         <section id="services" className="section fade-in">
           <h2 className="text-center">🌍 Services</h2>
           {services.length === 0 ? (
-            <div className="surface p-6 text-center muted">
-              No services available right now.
-            </div>
+            <div className="surface p-6 text-center muted">Loading services…</div>
           ) : (
             <div className="grid-auto">
               {services.map((s, i) => (
@@ -95,9 +96,7 @@ export default function Page() {
         <section id="emergencies" className="section fade-in">
           <h2 className="text-center text-red-500">🚨 Emergency Numbers</h2>
           {emergencies.length === 0 ? (
-            <div className="surface p-6 text-center muted">
-              Emergency numbers unavailable.
-            </div>
+            <div className="surface p-6 text-center muted">Loading emergency numbers…</div>
           ) : (
             <div className="grid-auto">
               {emergencies.map((c, i) => (
@@ -108,14 +107,9 @@ export default function Page() {
                   </h3>
                   <ul>
                     {Object.entries(c.numbers).map(([service, num], j) => (
-                      <li
-                        key={`${c.iso}-${service}-${j}`}
-                        className="flex justify-between text-sm"
-                      >
+                      <li key={`${c.iso}-${service}-${j}`} className="flex justify-between text-sm">
                         <span className="capitalize">{service}</span>
-                        <span className="text-red-600 dark:text-red-300 font-semibold">
-                          {num}
-                        </span>
+                        <span className="text-red-600 dark:text-red-300 font-semibold">{num}</span>
                       </li>
                     ))}
                   </ul>
@@ -129,9 +123,7 @@ export default function Page() {
         <section id="ads" className="section fade-in">
           <h2 className="text-center">🔥 Local Offers</h2>
           {ads.length === 0 ? (
-            <div className="surface p-6 text-center muted">
-              No offers available.
-            </div>
+            <div className="surface p-6 text-center muted">Loading offers…</div>
           ) : (
             <div className="grid-auto">
               {ads.map((ad, i) => (
@@ -143,9 +135,7 @@ export default function Page() {
                   className="card pop flex flex-col"
                 >
                   <h3 className="mb-1">{ad.title}</h3>
-                  <p className="muted text-sm">
-                    {ad.city} — {ad.category}
-                  </p>
+                  <p className="muted text-sm">{ad.city} — {ad.category}</p>
                 </a>
               ))}
             </div>
