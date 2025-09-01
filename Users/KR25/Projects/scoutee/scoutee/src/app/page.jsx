@@ -3,6 +3,7 @@
 import { useState } from "react";
 import data from "@/data/scoutee_master.json";
 import ChatBotAI from "@/components/ChatBotAI";
+import GeoPanel from "@/components/GeoPanel"; // 🔥 nuovo
 
 // Funzione helper per convertire codice ISO → bandiera emoji
 function isoToFlag(iso) {
@@ -71,11 +72,14 @@ export default function Page() {
           <a href="#ads" className="btn btn-ghost pop">
             Local Offers
           </a>
+          <a href="#geo" className="btn btn-ghost pop">
+            Local Panel
+          </a>
         </div>
       </header>
 
       <main className="space-y-20 container-app">
-        {/* 🚖 Services */}
+        {/* 🚖 Services (globali da JSON) */}
         <section id="services" className="section fade-in">
           <h2 className="text-center">🌍 Services</h2>
           {services.length === 0 ? (
@@ -91,7 +95,7 @@ export default function Page() {
           )}
         </section>
 
-        {/* 🚨 Emergencies */}
+        {/* 🚨 Emergencies (globali da JSON) */}
         <section id="emergencies" className="section fade-in">
           <h2 className="text-center text-red-500">🚨 Emergency Numbers</h2>
           {emergencies.length === 0 ? (
@@ -125,7 +129,7 @@ export default function Page() {
           )}
         </section>
 
-        {/* 🔥 Local Offers */}
+        {/* 🔥 Local Offers (globali da JSON) */}
         <section id="ads" className="section fade-in">
           <h2 className="text-center">🔥 Local Offers</h2>
           {ads.length === 0 ? (
@@ -150,6 +154,12 @@ export default function Page() {
               ))}
             </div>
           )}
+        </section>
+
+        {/* 📍 GeoPanel = versione personalizzata in base a dove sei */}
+        <section id="geo" className="section fade-in">
+          <h2 className="text-center">📍 Localized Panel</h2>
+          <GeoPanel />
         </section>
       </main>
 
