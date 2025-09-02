@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [theme, setTheme] = useState("light");
@@ -33,12 +34,19 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 backdrop-blur-lg bg-[var(--card-bg)]/80 border-b border-[var(--card-border)] shadow-sm">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* 🦊 Logo */}
-        <Link
-          href="/"
-          className="text-xl font-extrabold tracking-tight glow hover:text-[var(--primary)] transition"
-        >
-          🦊 Scoutee
+        {/* 🦊 Logo + Brand */}
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/logo.png"
+            alt="Scoutee Logo"
+            width={32}
+            height={32}
+            className="rounded-md drop-shadow-md"
+            priority
+          />
+          <span className="text-xl font-extrabold tracking-tight glow hover:text-[var(--primary)] transition">
+            Scoutee
+          </span>
         </Link>
 
         {/* 📑 Links Desktop */}
@@ -68,6 +76,8 @@ export default function Navbar() {
             className="md:hidden p-2 rounded-md border border-[var(--card-border)] bg-[var(--card-bg)] text-lg"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             {menuOpen ? "✖" : "☰"}
           </button>
@@ -76,7 +86,10 @@ export default function Navbar() {
 
       {/* 📱 Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-[var(--card-bg)]/95 border-t border-[var(--card-border)] px-6 py-4 space-y-4 animate-fade-in">
+        <div
+          id="mobile-menu"
+          className="md:hidden bg-[var(--card-bg)]/95 border-t border-[var(--card-border)] px-6 py-4 space-y-4 animate-fade-in"
+        >
           {links.map(({ href, label }) => (
             <Link
               key={href}

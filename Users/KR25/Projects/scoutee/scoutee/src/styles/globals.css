@@ -29,9 +29,9 @@ body {
   --muted: #6b7280;
   --primary: #2563eb;
   --primary-hover: #1e40af;
-  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-bg: rgba(255, 255, 255, 0.85);
   --card-border: #e5e7eb;
-  --card-glow: rgba(37, 99, 235, 0.25);
+  --card-glow: rgba(37, 99, 235, 0.35);
   --sos-border: #ef4444;
   --sos-bg: #fee2e2;
   --ring: 0 0 0 3px rgba(37,99,235,.4);
@@ -46,7 +46,7 @@ body {
   --primary-hover: #3b82f6;
   --card-bg: rgba(17, 24, 39, 0.75);
   --card-border: #374151;
-  --card-glow: rgba(96, 165, 250, 0.35);
+  --card-glow: rgba(96, 165, 250, 0.45);
   --sos-border: #f87171;
   --sos-bg: rgba(239, 68, 68, 0.1);
 }
@@ -66,7 +66,8 @@ nav {
   background: var(--card-bg);
   border-bottom: 1px solid var(--card-border);
   backdrop-filter: blur(20px) saturate(180%);
-  @apply sticky top-0 z-50 flex items-center justify-between px-8 py-4 shadow-sm;
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  @apply sticky top-0 z-50 flex items-center justify-between px-8 py-4 shadow-md;
 }
 
 /* ⚓ Footer */
@@ -74,6 +75,7 @@ footer {
   background: var(--card-bg);
   border-top: 1px solid var(--card-border);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   color: var(--muted);
   @apply mt-20 py-10 text-center text-sm;
 }
@@ -89,6 +91,7 @@ h3 { @apply text-xl font-semibold leading-snug; }
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: hueRotate 10s linear infinite;
 }
 
 /* 🫧 Card */
@@ -96,11 +99,13 @@ h3 { @apply text-xl font-semibold leading-snug; }
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   @apply p-6 rounded-2xl shadow-lg transition transform;
 }
 .card:hover {
   @apply -translate-y-1;
   box-shadow: 0 12px 32px var(--card-glow);
+  transform: translateY(-6px) scale(1.01);
 }
 
 /* 🚨 Emergencies card */
@@ -122,6 +127,7 @@ h3 { @apply text-xl font-semibold leading-snug; }
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   @apply rounded-2xl shadow-md p-4;
 }
 
@@ -139,15 +145,17 @@ h3 { @apply text-xl font-semibold leading-snug; }
 
 /* 🔘 Buttons */
 .btn {
-  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-medium transition;
+  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-medium transition shadow-md;
   border: 1px solid transparent;
 }
 .btn-primary {
   color: white;
-  background: var(--primary);
+  background: linear-gradient(90deg, var(--primary), #9333ea);
+  box-shadow: 0 0 12px var(--card-glow);
 }
 .btn-primary:hover {
-  background: var(--primary-hover);
+  background: linear-gradient(90deg, var(--primary-hover), #7e22ce);
+  transform: scale(1.03);
 }
 .btn-ghost {
   background: transparent;
@@ -156,6 +164,7 @@ h3 { @apply text-xl font-semibold leading-snug; }
 }
 .btn-ghost:hover {
   box-shadow: 0 8px 24px var(--card-glow);
+  transform: scale(1.02);
 }
 
 /* 🧑‍💻 Input */
@@ -172,25 +181,31 @@ h3 { @apply text-xl font-semibold leading-snug; }
 
 /* 🏷️ Badge */
 .badge {
-  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold shadow-sm;
 }
 .badge-info {
   background: rgba(37,99,235,.12);
   color: var(--primary);
 }
 
-/* ✨ Animazioni */
-.fade-in {
-  animation: fadeIn 0.6s ease forwards;
-}
+/* ✨ Animazioni extra */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+.fade-in { animation: fadeIn 0.6s ease forwards; }
+
+@keyframes pop { from { transform: scale(.95); } to { transform: scale(1); } }
 .pop { animation: pop .2s ease-out; }
-@keyframes pop {
-  from { transform: scale(.95); }
-  to { transform: scale(1); }
+
+@keyframes hueRotate { from { filter: hue-rotate(0); } to { filter: hue-rotate(360deg); } }
+
+.glow-pulse {
+  animation: pulseGlow 2s infinite alternate;
+}
+@keyframes pulseGlow {
+  from { text-shadow: 0 0 6px var(--primary), 0 0 12px rgba(59,130,246,.6); }
+  to { text-shadow: 0 0 12px var(--primary), 0 0 24px rgba(59,130,246,.8); }
 }
 
 /* ♿ Accessibilità */
@@ -226,7 +241,7 @@ h3 { @apply text-xl font-semibold leading-snug; }
 }
 
 /* 🗂️ Sections */
-.hero { @apply text-center py-20 md:py-24; }
+.hero { @apply text-center py-20 md:py-28; }
 .section { @apply container-app space-y-10; }
 
 /* 🧠 Glow */

@@ -1,26 +1,28 @@
 "use client";
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="mt-20 backdrop-blur-lg bg-[var(--card-bg)]/80 border-t border-[var(--card-border)] shadow-inner">
       <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
         
         {/* ⬅️ Brand */}
-        <p className="text-sm text-gray-600 dark:text-gray-400 text-center md:text-left">
-          © {new Date().getFullYear()}{" "}
-          <span className="font-semibold text-[var(--primary)]">Scoutee 🚀</span>.
+        <p className="text-sm text-[var(--muted)] text-center md:text-left">
+          © {year}{" "}
+          <span className="font-semibold text-[var(--primary)] glow">Scoutee 🚀</span>.
           All rights reserved.
         </p>
 
         {/* 📑 Links */}
         <div className="flex space-x-8 text-sm font-medium">
-          {["privacy", "terms"].map((link) => (
+          {["about", "privacy", "terms"].map((link) => (
             <a
               key={link}
               href={`/${link}`}
-              className="relative group"
+              className="relative group capitalize"
             >
-              <span className="hover:text-[var(--primary)] capitalize transition">
+              <span className="hover:text-[var(--primary)] transition">
                 {link}
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full"></span>
@@ -52,7 +54,7 @@ export default function Footer() {
       </div>
 
       {/* ❤️ Extra bottom note */}
-      <div className="text-center py-4 text-xs text-gray-500 dark:text-gray-500 border-t border-[var(--card-border)]">
+      <div className="text-center py-4 text-xs text-[var(--muted)] border-t border-[var(--card-border)]">
         Made with ❤️ for explorers worldwide 🌍
       </div>
     </footer>

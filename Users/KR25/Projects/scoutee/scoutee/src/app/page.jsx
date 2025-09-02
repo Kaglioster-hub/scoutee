@@ -3,9 +3,10 @@
 import { useState } from "react";
 import data from "@/data/scoutee_master.json";
 import ChatBotAI from "@/components/ChatBotAI";
-import GeoPanel from "@/components/GeoPanel"; // 🔥 nuovo
+import GeoPanel from "@/components/GeoPanel";
+import ServiceCard from "@/components/ServiceCard";
 
-// Funzione helper per convertire codice ISO → bandiera emoji
+// Funzione helper → ISO code → emoji bandiera
 function isoToFlag(iso) {
   if (!iso || iso === "ALL") return "🌍";
   return iso
@@ -13,73 +14,34 @@ function isoToFlag(iso) {
     .replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt()));
 }
 
-// ✅ Componente service con fallback logo sicuro
-function ServiceCard({ service }) {
-  const [imgError, setImgError] = useState(false);
-
-  const logoUrl = service.affiliate_url
-    ? `https://logo.clearbit.com/${new URL(service.affiliate_url).hostname}`
-    : null;
-
-  return (
-    <article className="card flex flex-col items-center pop text-center">
-      <div className="mb-3 flex items-center justify-center">
-        {!imgError && logoUrl ? (
-          <img
-            src={logoUrl}
-            alt={`${service.name} logo`}
-            className="w-12 h-12 object-contain rounded-md"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <span className="text-5xl">{service.icon}</span>
-        )}
-      </div>
-      <h3 className="mb-1">{service.name}</h3>
-      <p className="muted text-sm mb-4">{service.category}</p>
-      <a
-        href={service.affiliate_url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="btn btn-primary mt-auto"
-        aria-label={`Open ${service.name}`}
-      >
-        Open →
-      </a>
-    </article>
-  );
-}
-
 export default function Page() {
   const { services = [], emergencies = [], ads = [] } = data || {};
+  const [chatOpen, setChatOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
-      {/* 🌟 Hero */}
-      <header className="hero fade-in">
-        <h1 className="heading-gradient glow mb-6">Welcome to Scoutee 🚀</h1>
+      {/* 🌟 Hero con logo */}
+      <header className="hero fade-in flex flex-col items-center text-center">
+        <img
+          src="/logo.png"
+          alt="Scoutee Logo"
+          className="w-20 h-20 mb-4 drop-shadow-lg"
+        />
+        <h1 className="heading-gradient glow mb-4">Welcome to Scoutee 🚀</h1>
         <p className="muted text-lg max-w-2xl mx-auto">
           Your AI-powered survival companion for rides, eSIMs and emergency
           numbers worldwide.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-4">
-          <a href="#services" className="btn btn-primary pop">
-            Explore Services
-          </a>
-          <a href="#emergencies" className="btn btn-ghost pop">
-            Emergency Numbers
-          </a>
-          <a href="#ads" className="btn btn-ghost pop">
-            Local Offers
-          </a>
-          <a href="#geo" className="btn btn-ghost pop">
-            Local Panel
-          </a>
+          <a href="#services" className="btn btn-primary pop">Explore Services</a>
+          <a href="#emergencies" className="btn btn-ghost pop">Emergency Numbers</a>
+          <a href="#ads" className="btn btn-ghost pop">Local Offers</a>
+          <a href="#geo" className="btn btn-ghost pop">Local Panel</a>
         </div>
       </header>
 
       <main className="space-y-20 container-app">
-        {/* 🚖 Services (globali da JSON) */}
+        {/* 🚖 Services */}
         <section id="services" className="section fade-in">
           <h2 className="text-center">🌍 Services</h2>
           {services.length === 0 ? (
@@ -95,7 +57,7 @@ export default function Page() {
           )}
         </section>
 
-        {/* 🚨 Emergencies (globali da JSON) */}
+        {/* 🚨 Emergency Numbers */}
         <section id="emergencies" className="section fade-in">
           <h2 className="text-center text-red-500">🚨 Emergency Numbers</h2>
           {emergencies.length === 0 ? (
@@ -129,7 +91,7 @@ export default function Page() {
           )}
         </section>
 
-        {/* 🔥 Local Offers (globali da JSON) */}
+        {/* 🔥 Local Offers */}
         <section id="ads" className="section fade-in">
           <h2 className="text-center">🔥 Local Offers</h2>
           {ads.length === 0 ? (
@@ -156,15 +118,22 @@ export default function Page() {
           )}
         </section>
 
-        {/* 📍 GeoPanel = versione personalizzata in base a dove sei */}
+        {/* 📍 GeoPanel */}
         <section id="geo" className="section fade-in">
           <h2 className="text-center">📍 Localized Panel</h2>
           <GeoPanel />
         </section>
       </main>
 
-      {/* 🤖 Chatbot */}
-      <ChatBotAI />
+      {/* 💬 Floating Chatbot */}
+      {chatOpen && <ChatBotAI />}
+      <button
+        onClick={() => setChatOpen(!chatOpen)}
+        className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-[var(--primary)] text-white shadow-lg hover:bg-[var(--primary-hover)] transition text-xl"
+        aria-label="Toggle chat"
+      >
+        {chatOpen ? "✖" : "💬"}
+      </button>
     </div>
   );
 }

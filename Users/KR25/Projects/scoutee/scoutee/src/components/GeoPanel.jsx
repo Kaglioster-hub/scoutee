@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import data from "@/data/scoutee_master.json";
 
 // helper ISO → emoji bandiera
@@ -33,7 +33,6 @@ export default function GeoPanel() {
     data.services.filter((s) => s.countries.includes("ALL"))
   );
 
-  // funzione separata per trigger manuale
   const detectLocation = () => {
     setLoading(true);
     setError(null);
@@ -93,25 +92,25 @@ export default function GeoPanel() {
     }
   };
 
-  // tentativo iniziale automatico
   useEffect(() => {
     detectLocation();
   }, []);
 
   return (
-    <div className="p-6 bg-[var(--card)] rounded-2xl shadow-lg space-y-6">
+    <div className="p-6 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl shadow-lg space-y-6">
       <h2 className="text-xl font-bold flex items-center">
         📍 Local Scoutee Panel {loading && <Spinner />}
       </h2>
 
       {error && (
-        <div className="space-y-3">
+        <div className="space-y-3" aria-live="polite">
           <p className="text-sm text-yellow-500 bg-yellow-900/20 p-3 rounded-lg">
             {error}
           </p>
           <button
             onClick={detectLocation}
-            className="btn btn-primary pop"
+            disabled={loading}
+            className="btn btn-primary pop disabled:opacity-50"
           >
             📍 Attiva posizione e scopri i servizi vicino a te
           </button>
@@ -123,7 +122,6 @@ export default function GeoPanel() {
         <strong>{location.countryCode}</strong>
       </p>
 
-      {/* Emergency numbers */}
       {emergency && (
         <div>
           <h3 className="font-semibold mb-2">🚨 Emergency Numbers</h3>
@@ -137,7 +135,6 @@ export default function GeoPanel() {
         </div>
       )}
 
-      {/* Services */}
       {services.length > 0 && (
         <div>
           <h3 className="font-semibold mb-2">🛠 Available Services</h3>
@@ -147,9 +144,9 @@ export default function GeoPanel() {
                 key={i}
                 href={s.affiliate_url}
                 target="_blank"
-                className="flex items-center gap-2 p-2 bg-[var(--bg)] rounded-lg hover:shadow-md"
+                className="flex items-center gap-2 p-2 bg-[var(--bg)] rounded-lg hover:shadow-md transition"
               >
-                <span>{s.icon}</span>
+                <span>{s.icon || "🌐"}</span>
                 <span>{s.name}</span>
               </a>
             ))}
@@ -157,7 +154,6 @@ export default function GeoPanel() {
         </div>
       )}
 
-      {/* Ads */}
       {ads.length > 0 && (
         <div>
           <h3 className="font-semibold mb-2">🔥 Local Offers</h3>
