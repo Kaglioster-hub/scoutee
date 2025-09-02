@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-// Import da react-icons/si (Simple Icons via react-icons)
+
+// Import da @icons-pack/react-simple-icons
 import {
   // 🚖 Mobility
   SiUber,
@@ -19,6 +20,9 @@ import {
   SiStripe,
   SiVisa,
   SiMastercard,
+  SiN26,
+  SiMonzo,
+  SiCurve,
   // 🌍 Maps & tools
   SiGooglemaps,
   SiWaze,
@@ -30,9 +34,9 @@ import {
   // 🛒 Shopping & lifestyle
   SiAmazon,
   SiEbay,
-} from "react-icons/si";
+} from "@icons-pack/react-simple-icons";
 
-// 🔗 Mappa brand → icona ufficiale
+// 🔗 Brand mapping coerente con scoutee_master.json
 function getBrandIcon(name) {
   const map = {
     // Mobility
@@ -40,22 +44,34 @@ function getBrandIcon(name) {
     Lyft: SiLyft,
     Bolt: SiBolt,
     BlaBlaCar: SiBlablacar,
+    "FREE NOW": SiUber, // fallback → usa Uber
+    Enjoy: SiUber,      // fallback → stessa categoria
 
     // Travel
     Airbnb: SiAirbnb,
-    Booking: SiBookingdotcom,
+    "Booking.com": SiBookingdotcom,
     Expedia: SiExpedia,
     Skyscanner: SiSkyscanner,
+    "Hotels.com": SiBookingdotcom, // fallback booking
+    Hostelworld: SiAirbnb,         // fallback generico
 
     // Fintech
     Revolut: SiRevolut,
+    "Revolut Business": SiRevolut,
     Wise: SiWise,
+    "Wise Business": SiWise,
     PayPal: SiPaypal,
     Stripe: SiStripe,
     Visa: SiVisa,
     Mastercard: SiMastercard,
+    N26: SiN26,
+    Monzo: SiMonzo,
+    Curve: SiCurve,
+    Lydia: SiPaypal, // fallback
 
     // Maps
+    Citymapper: SiGooglemaps,
+    Moovit: SiGooglemaps,
     "Google Maps": SiGooglemaps,
     Waze: SiWaze,
     OpenStreetMap: SiOpenstreetmap,
@@ -65,10 +81,11 @@ function getBrandIcon(name) {
     Telegram: SiTelegram,
     Signal: SiSignal,
 
-    // Shopping
+    // Shopping & lifestyle
     Amazon: SiAmazon,
     eBay: SiEbay,
   };
+
   return map[name] || null;
 }
 
@@ -82,7 +99,7 @@ export default function ServiceCard({ service }) {
       return <BrandIcon size={40} title={service.name} />;
     }
 
-    // 2. immagine custom se URL
+    // 2. immagine custom se URL (tipo clearbit logos)
     if (!imgError && service.icon?.startsWith("http")) {
       return (
         <img
@@ -94,7 +111,7 @@ export default function ServiceCard({ service }) {
       );
     }
 
-    // 3. fallback emoji o 🌐
+    // 3. fallback emoji definita nel JSON o 🌐
     return <span className="text-3xl">{service.icon || "🌐"}</span>;
   };
 

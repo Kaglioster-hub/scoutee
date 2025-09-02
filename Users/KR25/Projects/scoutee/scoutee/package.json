@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "2.45.3",
+    "@icons-pack/react-simple-icons": "6.3.0",
     "framer-motion": "11.3.24",
     "i18next": "23.11.5",
     "mapbox-gl": "3.4.0",
