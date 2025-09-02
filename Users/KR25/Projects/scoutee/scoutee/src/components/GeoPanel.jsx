@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import data from "@/data/scoutee_master.json";
+import data from "@/data/scoutee_master";   // ✅ senza .json
 
 // helper ISO → emoji bandiera
 function isoToFlag(iso) {
