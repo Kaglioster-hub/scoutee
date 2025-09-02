@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@icons-pack/react-simple-icons": "^13.7.0"
+    "@icons-pack/react-simple-icons": "^13.7.0",
+    "react-icons": "^5.5.0"
   }
 }

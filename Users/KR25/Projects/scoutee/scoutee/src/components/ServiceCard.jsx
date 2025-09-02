@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
+// Import da react-icons/si (Simple Icons via react-icons)
 import {
   // 🚖 Mobility
   SiUber,
   SiLyft,
   SiBolt,
-  SiBlaBlaCar,
+  SiBlablacar,
   // 🏨 Travel & booking
   SiAirbnb,
   SiBookingdotcom,
@@ -28,8 +29,8 @@ import {
   SiSignal,
   // 🛒 Shopping & lifestyle
   SiAmazon,
-  SiEbay,
-} from "@icons-pack/react-simple-icons";
+  Siebay,
+} from "react-icons/si";  // ✅ cambiato qui
 
 // 🔗 Mappa brand → icona ufficiale
 function getBrandIcon(name) {
@@ -38,7 +39,7 @@ function getBrandIcon(name) {
     Uber: SiUber,
     Lyft: SiLyft,
     Bolt: SiBolt,
-    BlaBlaCar: SiBlaBlaCar,
+    BlaBlaCar: SiBlablacar,
 
     // Travel
     Airbnb: SiAirbnb,
@@ -66,7 +67,7 @@ function getBrandIcon(name) {
 
     // Shopping
     Amazon: SiAmazon,
-    eBay: SiEbay,
+    eBay: Siebay,
   };
   return map[name] || null;
 }
