@@ -29,8 +29,8 @@ import {
   SiSignal,
   // 🛒 Shopping & lifestyle
   SiAmazon,
-  Siebay,
-} from "react-icons/si";  // ✅ cambiato qui
+  SiEbay,
+} from "react-icons/si";
 
 // 🔗 Mappa brand → icona ufficiale
 function getBrandIcon(name) {
@@ -67,7 +67,7 @@ function getBrandIcon(name) {
 
     // Shopping
     Amazon: SiAmazon,
-    eBay: Siebay,
+    eBay: SiEbay,
   };
   return map[name] || null;
 }
