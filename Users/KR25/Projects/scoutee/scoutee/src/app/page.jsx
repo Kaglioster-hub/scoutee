@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import data from "@/data/scoutee_master.json";
+import data from "@/data/scoutee_master"; // ✅ fixato import JS
 import ChatBotAI from "@/components/ChatBotAI";
 import GeoPanel from "@/components/GeoPanel";
 import ServiceCard from "@/components/ServiceCard";
