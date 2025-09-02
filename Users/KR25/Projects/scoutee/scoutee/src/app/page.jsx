@@ -22,23 +22,31 @@ export default function Page() {
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
       {/* 🌟 Hero con logo */}
       <header className="hero fade-in flex flex-col items-center text-center">
-        <img
-          src="/logo.png"
-          alt="Scoutee Logo"
-          className="w-20 h-20 mb-4 drop-shadow-lg"
-        />
-        <h1 className="heading-gradient glow mb-4">Welcome to Scoutee 🚀</h1>
-        <p className="muted text-lg max-w-2xl mx-auto">
-          Your AI-powered survival companion for rides, eSIMs and emergency
-          numbers worldwide.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-4">
-          <a href="#services" className="btn btn-primary pop">Explore Services</a>
-          <a href="#emergencies" className="btn btn-ghost pop">Emergency Numbers</a>
-          <a href="#ads" className="btn btn-ghost pop">Local Offers</a>
-          <a href="#geo" className="btn btn-ghost pop">Local Panel</a>
-        </div>
-      </header>
+  <h1 className="heading-gradient glow mb-4 flex flex-col md:flex-row items-center gap-3 justify-center">
+    <img
+      src="/logo.png"
+      alt="Scoutee Logo"
+      className="w-14 h-14 md:w-12 md:h-12 drop-shadow-lg animate-spin-slow"
+    />
+    <span className="flex items-center gap-2">
+      Welcome to Scoutee
+      <span className="animate-bounce">🚀</span>
+    </span>
+  </h1>
+
+  <p className="muted text-lg max-w-2xl mx-auto">
+    Your AI-powered survival companion for rides, eSIMs and emergency
+    numbers worldwide.
+  </p>
+
+  <div className="mt-6 flex flex-wrap justify-center gap-4">
+    <a href="#services" className="btn btn-primary pop">Explore Services</a>
+    <a href="#emergencies" className="btn btn-ghost pop">Emergency Numbers</a>
+    <a href="#ads" className="btn btn-ghost pop">Local Offers</a>
+    <a href="#geo" className="btn btn-ghost pop">Local Panel</a>
+  </div>
+</header>
+
 
       <main className="space-y-20 container-app">
         {/* 🚖 Services */}

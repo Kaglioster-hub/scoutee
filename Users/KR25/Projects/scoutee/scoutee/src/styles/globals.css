@@ -100,7 +100,7 @@ h3 { @apply text-xl font-semibold leading-snug; }
   border: 1px solid var(--card-border);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  @apply p-6 rounded-2xl shadow-lg transition transform;
+  @apply p-6 rounded-lg shadow-lg transition transform;
 }
 .card:hover {
   @apply -translate-y-1;
@@ -112,7 +112,7 @@ h3 { @apply text-xl font-semibold leading-snug; }
 .card-sos {
   background: var(--sos-bg);
   border: 2px solid var(--sos-border);
-  @apply p-6 rounded-2xl shadow-md;
+  @apply p-6 rounded-lg shadow-md;
 }
 .card-sos h3 {
   @apply font-bold text-lg mb-3;
@@ -128,7 +128,7 @@ h3 { @apply text-xl font-semibold leading-snug; }
   border: 1px solid var(--card-border);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  @apply rounded-2xl shadow-md p-4;
+  @apply rounded-lg shadow-md p-4;
 }
 
 /* 🧱 Container */
@@ -145,7 +145,7 @@ h3 { @apply text-xl font-semibold leading-snug; }
 
 /* 🔘 Buttons */
 .btn {
-  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-medium transition shadow-md;
+  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-medium transition shadow-md;
   border: 1px solid transparent;
 }
 .btn-primary {
@@ -169,7 +169,7 @@ h3 { @apply text-xl font-semibold leading-snug; }
 
 /* 🧑‍💻 Input */
 .input {
-  @apply w-full px-4 py-2.5 rounded-xl text-sm outline-none transition border;
+  @apply w-full px-4 py-2.5 rounded-lg text-sm outline-none transition border;
   background: var(--card-bg);
   border-color: var(--card-border);
   color: var(--text);
@@ -181,7 +181,7 @@ h3 { @apply text-xl font-semibold leading-snug; }
 
 /* 🏷️ Badge */
 .badge {
-  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold shadow-sm;
+  @apply inline-flex items-center px-3 py-1 rounded-md text-xs font-semibold shadow-sm;
 }
 .badge-info {
   background: rgba(37,99,235,.12);
@@ -212,7 +212,7 @@ h3 { @apply text-xl font-semibold leading-snug; }
 *:focus-visible {
   outline: none;
   box-shadow: var(--ring);
-  border-radius: .75rem;
+  border-radius: .5rem;
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
@@ -228,7 +228,7 @@ h3 { @apply text-xl font-semibold leading-snug; }
 *::-webkit-scrollbar { width: 10px; height: 10px; }
 *::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--primary), #7c3aed);
-  border-radius: 999px;
+  border-radius: 6px;
 }
 *::-webkit-scrollbar-track { background: transparent; }
 
