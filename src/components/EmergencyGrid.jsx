@@ -8,7 +8,7 @@ export default function EmergencyGrid() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("/scoutee_master.json") // ✅ assicurati che sia in /public con questo nome
+    fetch("/scoutee_master.json") // 🔧 assicurati che il file sia in /public
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP error! ${res.status}`);
         return res.json();
@@ -25,11 +25,13 @@ export default function EmergencyGrid() {
   }, []);
 
   return (
-    <section className="section">
+    <section className="section fade-in">
       <h2 className="heading-gradient text-center mb-8">🚨 Emergency Numbers</h2>
 
       {loading && (
-        <div className="surface p-6 text-center muted">Loading emergency numbers...</div>
+        <div className="surface p-6 text-center muted">
+          Loading emergency numbers...
+        </div>
       )}
 
       {error && (
@@ -42,7 +44,7 @@ export default function EmergencyGrid() {
         </div>
       )}
 
-      <div className="grid-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {emergencies.map((e) => (
           <EmergencyCard key={e.iso} {...e} />
         ))}
