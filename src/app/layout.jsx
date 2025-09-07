@@ -1,8 +1,8 @@
-import "@/styles/globals.css";
+// src/app/layout.jsx
+import "./globals.css";  // <-- percorso corretto
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-// ✅ Sposta qui il themeColor
 export const viewport = {
   themeColor: "#2563eb",
 };
