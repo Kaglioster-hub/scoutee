@@ -1,0 +1,23 @@
+# Node / Next.js
+node_modules/
+.next/
+.vercel/
+dist/
+out/
+
+# OS / IDE junk
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# Windows system folders
+/Program Files/
+/Program Files (x86)/
+/ProgramData/
+/Windows/
+/Users/
+/$Recycle.Bin/
+/System Volume Information/
+.vercel
