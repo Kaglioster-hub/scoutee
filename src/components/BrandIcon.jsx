@@ -10,12 +10,13 @@ export default function BrandIcon({ id, name, domain, className = '' }) {
   const clearbit = domain ? `https://logo.clearbit.com/${domain}` : undefined;
   const duck = domain ? `https://icons.duckduckgo.com/ip3/${domain}.ico` : undefined;
 
+  // Combine all possible sources
   const chain = useMemo(() => [local, google, clearbit, duck].filter(Boolean), [local, google, clearbit, duck]);
   const [idx, setIdx] = useState(0);
   const [loading, setLoading] = useState(true);
 
   function onError() {
-    setIdx((i) => (i + 1 < chain.length ? i + 1 : i));
+    setIdx((i) => (i + 1 < chain.length ? i + 1 : i)); // Move to the next source on error
   }
 
   const src = chain[idx] || '';
@@ -40,7 +41,7 @@ export default function BrandIcon({ id, name, domain, className = '' }) {
       src={src}
       alt={`${name} logo`}
       onError={onError}
-      onLoad={() => setLoading(false)}
+      onLoad={() => setLoading(false)}  // Hide loading state once image is loaded
       loading="lazy"
       decoding="async"
       className={`w-12 h-12 md:w-14 md:h-14 rounded-md object-contain bg-white/80 dark:bg-white/10 p-1 shadow ${className}`}
