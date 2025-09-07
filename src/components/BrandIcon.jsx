@@ -20,15 +20,15 @@ export default function BrandIcon({ id, name, domain, className = '' }) {
 
   const src = chain[idx] || '';
 
-  // placeholder finale (iniziale del brand) quando la chain termina
+  // Placeholder finale (iniziale del brand) quando la chain termina
   if (!src || idx === chain.length - 1) {
     return (
       <div
-        className={`w-10 h-10 rounded-md bg-white/80 dark:bg-white/10 grid place-items-center shadow ${className}`}
+        className={`w-12 h-12 md:w-14 md:h-14 rounded-md bg-white/80 dark:bg-white/10 grid place-items-center shadow ${className}`}
         aria-label={`${name} logo`}
         title={name}
       >
-        <span className="text-lg font-bold text-gray-600 dark:text-gray-300">
+        <span className="text-xl font-bold text-gray-600 dark:text-gray-300">
           {(name?.[0] || '?').toUpperCase()}
         </span>
       </div>
@@ -43,7 +43,7 @@ export default function BrandIcon({ id, name, domain, className = '' }) {
       onLoad={() => setLoading(false)}
       loading="lazy"
       decoding="async"
-      className={`w-10 h-10 rounded-md object-contain bg-white/80 dark:bg-white/10 p-1 shadow ${className}`}
+      className={`w-12 h-12 md:w-14 md:h-14 rounded-md object-contain bg-white/80 dark:bg-white/10 p-1 shadow ${className}`}
       style={{ opacity: loading ? 0.5 : 1 }}
     />
   );
