@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Node modules directory
+=======
+<<<<<<< HEAD
+>>>>>>> b2d3b3ed5006d618d01fc40fcb33f9c37dbaf93e
 node_modules/
 
 # pnpm store
@@ -24,8 +28,35 @@ out/
 
 # Test coverage
 coverage/
+<<<<<<< HEAD
 
 # Vercel configuration files
+=======
+=======
+# Node / Next.js
+node_modules/
+.next/
+.vercel/
+dist/
+out/
+
+# OS / IDE junk
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# Windows system folders
+/Program Files/
+/Program Files (x86)/
+/ProgramData/
+/Windows/
+/Users/
+/$Recycle.Bin/
+/System Volume Information/
+>>>>>>> abaa1a3 (🚀 Update: Dynamic icon loading and fallback handling)
+>>>>>>> b2d3b3ed5006d618d01fc40fcb33f9c37dbaf93e
 .vercel
 
 # Gitignore file itself (so it doesn't get tracked)
