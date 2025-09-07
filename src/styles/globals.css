@@ -1,0 +1,224 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌙 Modalità colore */
+:root {
+  color-scheme: light dark;
+}
+
+/* 🔤 Base + tipografia */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+body {
+  @apply transition-colors duration-500 antialiased leading-relaxed;
+}
+
+/* 🎨 Palette + gradienti */
+:root {
+  --bg: #f9fafb;
+  --bg-gradient: linear-gradient(135deg, #f9fafb, #e5e7eb);
+  --text: #111827;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --primary-hover: #1e40af;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: #e5e7eb;
+  --card-glow: rgba(37, 99, 235, 0.35);
+  --sos-border: #ef4444;
+  --sos-bg: #fee2e2;
+  --ring: 0 0 0 3px rgba(37, 99, 235, .4);
+}
+
+.dark {
+  --bg: #0b1220;
+  --bg-gradient: radial-gradient(1200px 600px at 20% -10%, #0b1220 30%, #060a12 100%);
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --primary: #60a5fa;
+  --primary-hover: #3b82f6;
+  --card-bg: rgba(17, 24, 39, 0.75);
+  --card-border: #374151;
+  --card-glow: rgba(96, 165, 250, 0.45);
+  --sos-border: #f87171;
+  --sos-bg: rgba(239, 68, 68, 0.1);
+}
+
+/* 🌟 Link */
+a {
+  color: var(--primary);
+  @apply underline-offset-2 font-medium transition-colors;
+}
+a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* 🧭 Navbar (glass sticky) */
+nav {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--card-border);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  @apply sticky top-0 z-50 flex items-center justify-between px-8 py-4 shadow-md;
+}
+
+/* ⚓ Footer */
+footer {
+  background: var(--card-bg);
+  border-top: 1px solid var(--card-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--muted);
+  @apply mt-20 py-10 text-center text-sm;
+}
+
+/* 🪄 Titoli */
+h1 { @apply text-4xl md:text-5xl font-extrabold tracking-tight leading-tight; }
+h2 { @apply text-2xl md:text-3xl font-bold leading-snug; }
+h3 { @apply text-xl font-semibold leading-snug; }
+
+/* 🖌️ Gradient heading */
+.heading-gradient {
+  background: linear-gradient(90deg, var(--primary), #a855f7 50%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hueRotate 10s linear infinite;
+}
+
+/* 🫧 Card */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  @apply p-6 rounded-lg shadow-lg transition-transform duration-200;
+}
+.card:hover {
+  @apply -translate-y-1;
+  box-shadow: 0 12px 32px var(--card-glow);
+}
+
+/* 🚨 Emergencies card */
+.card-sos {
+  background: var(--sos-bg);
+  border: 2px solid var(--sos-border);
+  @apply p-6 rounded-lg shadow-md;
+}
+.card-sos h3 {
+  @apply font-bold text-lg mb-3;
+  color: #dc2626;
+}
+.dark .card-sos h3 { color: #f87171; }
+.card-sos ul { @apply space-y-1 text-sm; }
+.card-sos li span:first-child { @apply font-semibold capitalize; }
+
+/* 🧊 Surface */
+.surface {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  @apply rounded-lg shadow-md p-4;
+}
+
+/* 🧱 Container */
+.container-app { @apply max-w-6xl mx-auto px-6; }
+
+/* 🧱 Grid util responsive */
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1.75rem;
+}
+
+/* 🔘 Buttons */
+.btn {
+  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-medium transition shadow-md;
+  border: 1px solid transparent;
+}
+.btn-primary {
+  color: white;
+  background: linear-gradient(90deg, var(--primary), #9333ea);
+  box-shadow: 0 0 12px var(--card-glow);
+}
+.btn-primary:hover {
+  background: linear-gradient(90deg, var(--primary-hover), #7e22ce);
+  transform: scale(1.03);
+}
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--card-border);
+  color: var(--text);
+}
+.btn-ghost:hover {
+  box-shadow: 0 8px 24px var(--card-glow);
+  transform: scale(1.02);
+}
+
+/* 🧑‍💻 Input (forms plugin + custom override) */
+input, select, textarea {
+  @apply w-full rounded-lg border border-[var(--card-border)] bg-[var(--card-bg)] text-sm text-[var(--text)] transition shadow-sm;
+}
+input:focus, select:focus, textarea:focus {
+  @apply ring-2 ring-[var(--primary)] outline-none;
+}
+input::placeholder, textarea::placeholder {
+  @apply text-[var(--muted)];
+}
+
+/* 🏷️ Badge */
+.badge {
+  @apply inline-flex items-center px-3 py-1 rounded-md text-xs font-semibold shadow-sm;
+}
+.badge-info {
+  background: rgba(37,99,235,.12);
+  color: var(--primary);
+}
+
+/* ✨ Animazioni extra */
+@keyframes hueRotate { from { filter: hue-rotate(0); } to { filter: hue-rotate(360deg); } }
+
+.glow { text-shadow: 0 0 8px var(--primary), 0 0 18px rgba(59,130,246,.6); }
+.glow-pulse { animation: pulseGlow 2s infinite alternate; }
+@keyframes pulseGlow {
+  from { text-shadow: 0 0 6px var(--primary), 0 0 12px rgba(59,130,246,.6); }
+  to   { text-shadow: 0 0 12px var(--primary), 0 0 24px rgba(59,130,246,.8); }
+}
+
+/* ♿ Accessibilità */
+*:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: .5rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+
+/* 🔍 Selezione testo */
+::selection {
+  background: rgba(37,99,235,.25);
+  color: inherit;
+}
+
+/* 🧭 Scrollbar */
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary), #7c3aed);
+  border-radius: 6px;
+}
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* 🗂️ Sections */
+.hero { @apply text-center py-20 md:py-28; }
+.section { @apply container-app space-y-10; }
