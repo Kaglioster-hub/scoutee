@@ -1,12 +1,32 @@
+# Node modules directory
 node_modules/
+
+# pnpm store
 .pnpm-store/
+
+# Build output
 dist/
 .next/
 out/
+
+# Environment variables (ignora tutti tranne .env.local.example)
 .env*
 !.env.local.example
+
+# VSCode settings
 .vscode/
+
+# JetBrains project files
 .idea/
+
+# macOS system files
 .DS_Store
+
+# Test coverage
 coverage/
+
+# Vercel configuration files
 .vercel
+
+# Gitignore file itself (so it doesn't get tracked)
+.gitignore
