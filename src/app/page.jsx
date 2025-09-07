@@ -1,6 +1,21 @@
+"use client";
+export const dynamic = "force-dynamic";
+
 import { useState, useMemo } from "react";
+import nextDynamic from "next/dynamic";
+
 import data from "@/data/scoutee_master.json";
-import ServiceCard from "@/components/ServiceCard";  // supponiamo che questa gestisca i singoli servizi
+import ServiceCard from "@/components/ServiceCard";
+
+// ⬇️ carica componenti solo lato client (niente SSR)
+const GeoPanel = nextDynamic(() => import("@/components/GeoPanel"), { ssr: false });
+const ChatBotAI = nextDynamic(() => import("@/components/ChatBotAI"), {
+  ssr: false,
+  loading: () => null,
+});
+
+// dati sicuri anche in build/SSR
+const ads = Array.isArray(data?.ads) ? data.ads : [];
 
 function isoToFlag(iso) {
   if (!iso || iso === "ALL") return "🌍";
@@ -31,7 +46,6 @@ export default function Page() {
             width={128}
             height={128}
             onError={(e) => {
-              // se per qualche motivo logo.png non viene servito, prova SVG → poi icona PWA
               e.currentTarget.onerror = null;
               e.currentTarget.src = "/logo.svg";
               setTimeout(() => {
@@ -144,3 +158,4 @@ export default function Page() {
     </div>
   );
 }
+

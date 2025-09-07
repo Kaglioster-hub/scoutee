@@ -1,0 +1,67 @@
+=== ADS AUDIT REPORT ===
+Root: C:\Users\KR25\Projects\scoutee
+Trovate 7 occorrenze di '\bads\b'
+
+-----
+C:\Users\KR25\Projects\scoutee\src\app\page.jsx:64:23
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <a href="#services" className="btn btn-primary pop">Explore Services</a>
+            <a href="#emergencies" className="btn btn-ghost pop">Emergency Numbers</a>
+            <a href="#ads" className="btn btn-ghost pop">Local Offers</a>
+            <a href="#geo" className="btn btn-ghost pop">Local Panel</a>
+          </div>
+        </div>
+-----
+C:\Users\KR25\Projects\scoutee\src\app\page.jsx:109:22
+        </section>
+
+        {/* 🔥 Local Offers */}
+        <section id="ads" className="section fade-in">
+          <h2 className="text-center">🔥 Local Offers</h2>
+          <div className="grid-auto">
+            {ads.map((ad, i) => (
+-----
+C:\Users\KR25\Projects\scoutee\src\app\page.jsx:112:14
+        <section id="ads" className="section fade-in">
+          <h2 className="text-center">🔥 Local Offers</h2>
+          <div className="grid-auto">
+            {ads.map((ad, i) => (
+              <a
+                key={ad.url || `${ad.city}-${i}`}
+                href={ad.url}
+-----
+C:\Users\KR25\Projects\scoutee\src\components\GeoPanel.jsx:35:10
+  const [emergency, setEmergency] = useState(
+    data.emergencies.find((e) => e.iso === "ALL")
+  );
+  const [ads, setAds] = useState([]);
+  const [services, setServices] = useState(
+    data.services.filter((s) => s.countries.includes("ALL"))
+  );
+-----
+C:\Users\KR25\Projects\scoutee\src\components\GeoPanel.jsx:76:35
+              data.emergencies.find((e) => e.iso === "ALL");
+            setEmergency(foundEmergency);
+
+            const foundAds = data.ads.filter(
+              (a) => a.city.toLowerCase() === (city || "").toLowerCase()
+            );
+            setAds(foundAds);
+-----
+C:\Users\KR25\Projects\scoutee\src\components\GeoPanel.jsx:187:8
+        </div>
+      )}
+
+      {ads.length > 0 && (
+        <div>
+          <h3 className="font-semibold mb-2">🔥 Local Offers</h3>
+          <ul className="list-disc pl-5">
+-----
+C:\Users\KR25\Projects\scoutee\src\components\GeoPanel.jsx:191:14
+        <div>
+          <h3 className="font-semibold mb-2">🔥 Local Offers</h3>
+          <ul className="list-disc pl-5">
+            {ads.map((a, i) => (
+              <li key={i}>
+                <a
+                  href={a.url}
