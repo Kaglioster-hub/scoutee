@@ -12,6 +12,7 @@ export default function BrandIcon({ id, name, domain, className = '' }) {
 
   const chain = useMemo(() => [local, google, clearbit, duck].filter(Boolean), [local, google, clearbit, duck]);
   const [idx, setIdx] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   function onError() {
     setIdx((i) => (i + 1 < chain.length ? i + 1 : i));
@@ -39,9 +40,11 @@ export default function BrandIcon({ id, name, domain, className = '' }) {
       src={src}
       alt={`${name} logo`}
       onError={onError}
+      onLoad={() => setLoading(false)}
       loading="lazy"
       decoding="async"
       className={`w-10 h-10 rounded-md object-contain bg-white/80 dark:bg-white/10 p-1 shadow ${className}`}
+      style={{ opacity: loading ? 0.5 : 1 }}
     />
   );
 }
