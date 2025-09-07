@@ -1,107 +1,66 @@
 "use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
-  const [theme, setTheme] = useState("light");
-  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const [isDark, setIsDark] = useState(false);
 
-  // ✅ Gestione tema con localStorage + prefers-color-scheme
+  // init theme from localStorage / class on <html>
   useEffect(() => {
+    const root = document.documentElement;
     const saved = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initial = saved || (prefersDark ? "dark" : "light");
-    setTheme(initial);
-    document.documentElement.classList.toggle("dark", initial === "dark");
+    const initial = saved ? saved === "dark" : root.classList.contains("dark");
+    setIsDark(initial);
+    root.classList.toggle("dark", initial);
   }, []);
 
   const toggleTheme = () => {
-    const next = theme === "light" ? "dark" : "light";
-    setTheme(next);
-    localStorage.setItem("theme", next);
-    document.documentElement.classList.toggle("dark", next === "dark");
+    const next = !isDark;
+    setIsDark(next);
+    const root = document.documentElement;
+    root.classList.toggle("dark", next);
+    localStorage.setItem("theme", next ? "dark" : "light");
   };
 
-  // ✅ Link principali
-  const links = [
-    { href: "/about", label: "About" },
-    { href: "/privacy", label: "Privacy" },
-    { href: "/terms", label: "Terms" },
-  ];
+  const linkCls = (href) =>
+    `px-2 py-1 transition ${
+      pathname === href ? "text-primary font-semibold" : "opacity-90 hover:opacity-100"
+    }`;
 
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-lg bg-[var(--card-bg)]/80 border-b border-[var(--card-border)] shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* 🦊 Logo + Brand */}
-        <Link href="/" className="flex items-center gap-2">
-          <Image
-            src="/logo.png"
-            alt="Scoutee Logo"
-            width={32}
-            height={32}
-            className="rounded-md drop-shadow-md"
-            priority
-          />
-          <span className="text-xl font-extrabold tracking-tight glow hover:text-[var(--primary)] transition">
-            Scoutee
-          </span>
+    <nav className="sticky top-0 z-50 border-b border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-xl">
+      <div className="container-app h-14 flex items-center justify-between">
+        {/* Brand solo testo (niente logo qui) */}
+        <Link href="/" className="text-lg md:text-xl font-extrabold tracking-tight">
+          Scoutee
         </Link>
 
-        {/* 📑 Links Desktop */}
-        <div className="hidden md:flex items-center space-x-8 text-sm font-medium">
-          {links.map(({ href, label }) => (
-            <Link key={href} href={href} className="relative group transition">
-              <span className="hover:text-[var(--primary)]">{label}</span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-          ))}
-        </div>
+        <div className="flex items-center gap-4">
+          <Link href="/about" className={linkCls("/about")}>About</Link>
+          <Link href="/privacy" className={linkCls("/privacy")}>Privacy</Link>
+          <Link href="/terms" className={linkCls("/terms")}>Terms</Link>
 
-        {/* ⚡ Actions */}
-        <div className="flex items-center space-x-4">
-          {/* Toggle Theme */}
+          {/* Theme toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full border border-[var(--card-border)] bg-[var(--card-bg)] hover:shadow-glow transition text-lg"
-            title="Toggle theme"
-            aria-label="Toggle theme"
+            aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+            className="ml-2 inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--card-border)] bg-[var(--card-bg)] hover:shadow-md transition"
           >
-            {theme === "light" ? "🌙" : "☀️"}
-          </button>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            className="md:hidden p-2 rounded-md border border-[var(--card-border)] bg-[var(--card-bg)] text-lg"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-          >
-            {menuOpen ? "✖" : "☰"}
+            {/* icona inline, niente dipendenze */}
+            {isDark ? (
+              <svg viewBox="0 0 24 24" className="w-5 h-5" aria-hidden>
+                <path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/>
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" className="w-5 h-5" aria-hidden>
+                <path fill="currentColor" d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"/><path fill="currentColor" d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5L19 19M5 19l-1.5 1.5M20.5 3.5L19 5"/>
+              </svg>
+            )}
           </button>
         </div>
       </div>
-
-      {/* 📱 Mobile Menu */}
-      {menuOpen && (
-        <div
-          id="mobile-menu"
-          className="md:hidden bg-[var(--card-bg)]/95 border-t border-[var(--card-border)] px-6 py-4 space-y-4 animate-fade-in"
-        >
-          {links.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className="block text-sm font-medium hover:text-[var(--primary)]"
-              onClick={() => setMenuOpen(false)}
-            >
-              {label}
-            </Link>
-          ))}
-        </div>
-      )}
     </nav>
   );
 }

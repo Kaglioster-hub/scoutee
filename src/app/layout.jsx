@@ -2,11 +2,15 @@ import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+// ✅ Sposta qui il themeColor
+export const viewport = {
+  themeColor: "#2563eb",
+};
+
 export const metadata = {
   title: "Scoutee 🚀 — Survival Companion",
   description: "Find services, SOS & AI help based on where you are.",
   manifest: "/manifest.json",
-  themeColor: "#2563eb",
   icons: {
     icon: "/favicon.ico",
     apple: "/icons/apple-touch-icon.png",
@@ -24,9 +28,7 @@ export default function RootLayout({ children }) {
       <body className="bg-[var(--bg)] text-[var(--text)] antialiased transition-colors duration-300">
         <div className="flex flex-col min-h-screen">
           <Navbar />
-          <main id="content" className="flex-grow">
-            {children}
-          </main>
+          <main id="content" className="flex-grow">{children}</main>
           <Footer />
         </div>
       </body>
