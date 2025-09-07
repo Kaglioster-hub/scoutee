@@ -17,11 +17,8 @@ export default function Page() {
   const { services = [], emergencies = [], ads = [] } = data || {};
   const [chatOpen, setChatOpen] = useState(false);
 
-  // piccola metrica utile nell’hero (non cambia la logica)
   const stats = useMemo(() => {
-    const countries = new Set(
-      services.flatMap((s) => s.countries || [])
-    );
+    const countries = new Set(services.flatMap((s) => s.countries || []));
     countries.delete("ALL");
     return { services: services.length, countries: countries.size };
   }, [services]);
@@ -31,22 +28,34 @@ export default function Page() {
       {/* 🌟 HERO unico con logo grande */}
       <header className="hero fade-in text-center py-16">
         <div className="container-app flex flex-col items-center gap-5">
+          {/* Usa PNG con fallback automatico */}
           <img
-            src="/logo.svg"
+            src="/logo.png"
             alt="Scoutee logo"
             width={128}
             height={128}
+            onError={(e) => {
+              // se per qualche motivo logo.png non viene servito, prova SVG → poi icona PWA
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "/logo.svg";
+              setTimeout(() => {
+                if (e.currentTarget.naturalWidth === 0) {
+                  e.currentTarget.src = "/icons/icon-192.png";
+                }
+              }, 0);
+            }}
             className="w-28 h-28 md:w-32 md:h-32 drop-shadow-[0_0_30px_var(--card-glow)] motion-safe:hover:scale-[1.03] transition-transform"
           />
+
           <h1 className="heading-gradient glow text-4xl md:text-5xl font-extrabold tracking-tight">
             Welcome to Scoutee
             <span className="ml-2 align-middle hidden sm:inline-block motion-safe:animate-bounce">🚀</span>
           </h1>
+
           <p id="tagline" className="muted text-lg md:text-xl max-w-2xl">
             Your AI-powered survival companion for rides, eSIMs and emergency numbers worldwide.
           </p>
 
-          {/* piccole stats (facoltative ma utili) */}
           <p className="text-sm muted">
             {stats.services} services · {stats.countries}+ countries
           </p>
@@ -111,9 +120,7 @@ export default function Page() {
                 className="card pop flex flex-col"
               >
                 <h3 className="mb-1">{ad.title}</h3>
-                <p className="muted text-sm">
-                  {ad.city} — {ad.category}
-                </p>
+                <p className="muted text-sm">{ad.city} — {ad.category}</p>
               </a>
             ))}
           </div>
