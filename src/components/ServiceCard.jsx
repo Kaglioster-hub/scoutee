@@ -1,45 +1,34 @@
 "use client";
-import BrandIcon from "./BrandIcon";
-
-function extractDomain(service) {
-  try {
-    const url = new URL(service.affiliate_url || service.url);
-    return url.hostname.replace(/^www\./, "");
-  } catch {
-    return (service.slug || "").replace(/^https?:\/\//, "").replace(/^www\./, "");
-  }
-}
 
 export default function ServiceCard({ service }) {
-  const id =
-    service.id ||
-    service.slug ||
-    (service.name ? service.name.toLowerCase().replace(/\s+/g, "-") : "brand");
-
-  const domain = service.domain || extractDomain(service) || null;
-  const href =
-    service.affiliate_url ||
-    service.url ||
-    (domain ? `https://${domain}` : "#");
-
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="card flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition"
-      aria-label={`Open ${service.name}`}
-    >
-      <div className="flex items-center justify-center w-16 h-16 mb-3 rounded-lg">
-        <BrandIcon id={id} name={service.name} domain={domain} />
+    <div className="card pop flex flex-col items-center text-center p-4">
+      {/* Logo servizio */}
+      <div className="w-10 h-10 flex items-center justify-center mb-2">
+        {service.icon ? (
+          <img
+            src={service.icon}
+            alt={`${service.name} logo`}
+            className="max-w-full max-h-full object-contain"
+          />
+        ) : (
+          <span className="text-2xl">🌐</span>
+        )}
       </div>
 
-      <h3 className="font-semibold text-lg">{service.name}</h3>
-      <p className="muted text-sm">{service.category}</p>
+      {/* Nome e categoria */}
+      <h3 className="font-semibold text-base">{service.name}</h3>
+      <p className="muted text-xs mb-3">{service.category || "Service"}</p>
 
-      <div className="mt-4 w-full">
-        <span className="btn btn-primary w-full block">Open →</span>
-      </div>
-    </a>
+      {/* Bottone */}
+      <a
+        href={service.affiliate_url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn btn-primary w-full text-sm py-1.5"
+      >
+        Open →
+      </a>
+    </div>
   );
 }

@@ -28,28 +28,17 @@ export default function Page() {
       {/* 🌟 HERO unico con logo grande */}
       <header className="hero fade-in text-center py-16">
         <div className="container-app flex flex-col items-center gap-5">
-          {/* Usa PNG con fallback automatico */}
           <img
             src="/logo.png"
             alt="Scoutee logo"
-            width={128}
-            height={128}
-            onError={(e) => {
-              // se per qualche motivo logo.png non viene servito, prova SVG → poi icona PWA
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = "/logo.svg";
-              setTimeout(() => {
-                if (e.currentTarget.naturalWidth === 0) {
-                  e.currentTarget.src = "/icons/icon-192.png";
-                }
-              }, 0);
-            }}
-            className="w-28 h-28 md:w-32 md:h-32 drop-shadow-[0_0_30px_var(--card-glow)] motion-safe:hover:scale-[1.03] transition-transform"
+            width={160}
+            height={160}
+            className="w-40 h-40 md:w-44 md:h-44 drop-shadow-[0_0_40px_var(--card-glow)] motion-safe:hover:scale-[1.05] transition-transform"
           />
 
           <h1 className="heading-gradient glow text-4xl md:text-5xl font-extrabold tracking-tight">
             Welcome to Scoutee
-            <span className="ml-2 align-middle hidden sm:inline-block motion-safe:animate-bounce">🚀</span>
+            <span className="ml-2 hidden sm:inline-block motion-safe:animate-bounce">🚀</span>
           </h1>
 
           <p id="tagline" className="muted text-lg md:text-xl max-w-2xl">
@@ -76,7 +65,7 @@ export default function Page() {
           {services.length === 0 ? (
             <div className="surface p-6 text-center muted">No services available right now.</div>
           ) : (
-            <div className="grid-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {services.map((s, i) => (
                 <ServiceCard key={s.slug || s.name || `svc-${i}`} service={s} />
               ))}
@@ -87,7 +76,7 @@ export default function Page() {
         {/* 🚨 Emergency Numbers */}
         <section id="emergencies" className="section fade-in">
           <h2 className="text-center text-red-500">🚨 Emergency Numbers</h2>
-          <div className="grid-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {emergencies.map((c, i) => (
               <article key={c.iso || `cty-${i}`} className="card-sos pop">
                 <h3 className="flex items-center gap-2 mb-2">
@@ -110,16 +99,16 @@ export default function Page() {
         {/* 🔥 Local Offers */}
         <section id="ads" className="section fade-in">
           <h2 className="text-center">🔥 Local Offers</h2>
-          <div className="grid-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {ads.map((ad, i) => (
               <a
                 key={ad.url || `${ad.city}-${i}`}
                 href={ad.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="card pop flex flex-col"
+                className="card pop flex flex-col p-3"
               >
-                <h3 className="mb-1">{ad.title}</h3>
+                <h3 className="mb-1 text-base font-semibold">{ad.title}</h3>
                 <p className="muted text-sm">{ad.city} — {ad.category}</p>
               </a>
             ))}
