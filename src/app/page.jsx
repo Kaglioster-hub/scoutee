@@ -6,8 +6,9 @@ import nextDynamic from "next/dynamic";
 
 import data from "@/data/scoutee_master.json";
 import ServiceCard from "@/components/ServiceCard";
+import ThemeToggle from "@/components/ThemeToggle"; // 👈 toggle tema
 
-// ⬇️ carica componenti solo lato client (niente SSR)
+// carica componenti solo lato client (niente SSR)
 const GeoPanel = nextDynamic(() => import("@/components/GeoPanel"), { ssr: false });
 const ChatBotAI = nextDynamic(() => import("@/components/ChatBotAI"), {
   ssr: false,
@@ -36,10 +37,15 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
-      {/* 🌟 HERO unico con logo grande */}
-      <header className="hero fade-in text-center py-16">
+      {/* 🌟 HERO */}
+      <header className="hero fade-in text-center py-16 relative">
         <div className="container-app flex flex-col items-center gap-5">
-          {/* Usa PNG con fallback automatico */}
+          {/* Toggle tema in alto a destra */}
+          <div className="absolute top-4 right-4">
+            <ThemeToggle />
+          </div>
+
+          {/* Logo con fallback */}
           <img
             src="/logo.png"
             alt="Scoutee logo"
@@ -80,16 +86,23 @@ export default function Page() {
         </div>
       </header>
 
+      {/* MAIN */}
       <main className="space-y-20 container-app">
         {/* 🚖 Services */}
         <section id="services" className="section fade-in">
           <h2 className="text-center">🌍 Services</h2>
           {services.length === 0 ? (
-            <div className="surface p-6 text-center muted">No services available right now.</div>
+            <div className="surface p-6 text-center muted">
+              No services available right now.
+            </div>
           ) : (
             <div className="grid-auto">
               {services.map((s, i) => (
-                <ServiceCard key={s.slug || s.name || `svc-${i}`} service={s} icon={s.icon || "/default-icon.png"} />
+                <ServiceCard
+                  key={s.slug || s.name || `svc-${i}`}
+                  service={s}
+                  icon={s.icon || "/default-icon.png"}
+                />
               ))}
             </div>
           )}
@@ -107,9 +120,14 @@ export default function Page() {
                 </h3>
                 <ul>
                   {Object.entries(c.numbers).map(([service, num]) => (
-                    <li key={`${c.iso}-${service}`} className="flex justify-between text-sm">
+                    <li
+                      key={`${c.iso}-${service}`}
+                      className="flex justify-between text-sm"
+                    >
                       <span className="capitalize">{service}</span>
-                      <span className="text-red-600 dark:text-red-300 font-semibold">{num}</span>
+                      <span className="text-red-600 dark:text-red-300 font-semibold">
+                        {num}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -131,7 +149,9 @@ export default function Page() {
                 className="card pop flex flex-col"
               >
                 <h3 className="mb-1">{ad.title}</h3>
-                <p className="muted text-sm">{ad.city} — {ad.category}</p>
+                <p className="muted text-sm">
+                  {ad.city} — {ad.category}
+                </p>
               </a>
             ))}
           </div>
@@ -158,4 +178,3 @@ export default function Page() {
     </div>
   );
 }
-
